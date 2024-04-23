@@ -10,5 +10,6 @@
     <color name="gray">#74777F</color>
     <color name="gray_light">#F3F4F9</color>
     <color name="gray_deep">#44474E</color>
+    <color name="gray_little">#EFF1F8</color>
 
 </resources>
