@@ -7,11 +7,116 @@
     android:layout_height="match_parent"
     tools:context=".ui.MyPageFragment">
 
-    <TextView
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="MyPage Fragment"
-        android:textSize="20sp"/>
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            >
+            <TextView
+                android:id="@+id/tv_blog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="185dp"
+                tools:layout_editor_absoluteY="675dp" />
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="145dp"
+                tools:layout_editor_absoluteY="68dp" />
+
+            <ImageView
+                android:id="@+id/img_sheep"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/img_sheep"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="155dp"
+                tools:layout_editor_absoluteY="535dp" />
+
+            <TextView
+                android:id="@+id/tv_adress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="138dp"
+                tools:layout_editor_absoluteY="270dp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="138dp"
+                tools:layout_editor_absoluteY="338dp" />
+
+            <TextView
+                android:id="@+id/tv_newevent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="159dp"
+                tools:layout_editor_absoluteY="563dp" />
+
+            <TextView
+                android:id="@+id/tv_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                tools:layout_editor_absoluteX="152dp"
+                tools:layout_editor_absoluteY="639dp" />
+
+            <ImageView
+                android:id="@+id/img_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add"
+                tools:layout_editor_absoluteX="286dp"
+                tools:layout_editor_absoluteY="548dp" />
+
+            <ImageView
+                android:id="@+id/img_github"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_github"
+                tools:layout_editor_absoluteX="286dp"
+                tools:layout_editor_absoluteY="582dp" />
+
+
+            <ImageView
+                android:id="@+id/img_blog"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_blog"
+                tools:layout_editor_absoluteX="318dp"
+                tools:layout_editor_absoluteY="647dp" />
+
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="45dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
