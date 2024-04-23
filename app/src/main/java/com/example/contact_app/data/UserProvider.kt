@@ -1,10 +1,8 @@
 package com.example.contact_app.data.model
 
 import com.example.contact_app.R
-import java.util.Locale
-import kotlin.random.Random
 
-object UserPrivider {
+object UserProvider {
     var users: List<User>
 
     init {
