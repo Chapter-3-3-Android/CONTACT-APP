@@ -1,16 +1,10 @@
 package com.example.contact_app.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
 import com.example.contact_app.R
-import com.example.contact_app.data.model.UserPrivider
 import com.example.contact_app.databinding.ActivityMainBinding
 import com.example.contact_app.ui.adapter.ViewPagerFragmentAdapter
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayout.Tab
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ContactActivity : AppCompatActivity() {
