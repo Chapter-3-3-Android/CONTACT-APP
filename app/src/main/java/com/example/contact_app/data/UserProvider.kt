@@ -1,10 +1,8 @@
 package com.example.contact_app.data.model
 
 import com.example.contact_app.R
-import java.util.Locale
-import kotlin.random.Random
 
-object UserPrivider {
+object UserProvider {
     var users: List<User>
 
     init {
@@ -20,7 +18,7 @@ object UserPrivider {
             val firstName = firstNames.random()
             val lastName = lastNames.random()
             val phoneNumber = "+233 ${(1000..9999).random()} ${(10..99).random()} ${(100..999).random()}"
-            val email = "${firstName.lowercase()}.${lastName.lowercase()}${i}@example.com"
+            val email = "${firstName.lowercase()}${lastName.lowercase()}${i}@example.com"
 
             val user = User(
                 name = "$firstName $lastName",
