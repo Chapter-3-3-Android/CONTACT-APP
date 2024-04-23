@@ -3,13 +3,24 @@ package com.example.contact_app.data.model
 import com.example.contact_app.R
 
 object UserProvider {
-    var users: List<User>
+    private var _users: MutableList<User>
+    val users: List<User> get() = _users
 
     init {
-        users = createDummyUsers()
+        _users = createDummyUsers()
     }
 
-    fun createDummyUsers(): List<User> {
+    fun addUser(user: User) {
+        _users.add(user)
+    }
+
+    fun switchFavoriteByUser(index: Int) {
+        _users[index] = _users[index].copy(
+            isFavorite = !(_users[index].isFavorite)
+        )
+    }
+
+    private fun createDummyUsers(): MutableList<User> {
         val users = mutableListOf<User>()
         val firstNames = listOf("James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth")
         val lastNames = listOf("Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor")
