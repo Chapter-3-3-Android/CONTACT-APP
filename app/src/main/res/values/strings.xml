@@ -7,6 +7,17 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <!-- dialog -->
+    <string name="dialog_warning_name">이름을 입력해주세요. (1자 이상)</string>
+    <string name="dialog_warning_number">전화번호를 입력해주세요.</string>
+    <string name="dialog_warning_address">주소를 입력해주세요.</string>
+    <string name="dialog_warning_time">날짜를 입력해주세요.</string>
+    <string name="dialog_warning_remind_time">리마인드 시간을 숫자로만 입력해주세요. (분 단위)</string>
+    <string name="dialog_button_negative">Cancel</string>
+    <string name="dialog_button_positive">Save</string>
+
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
