@@ -89,6 +89,7 @@
                 style="@style/dialog.edittext"/>
 
             <TextView
+
                 android:id="@+id/tv_date_warning"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -96,6 +97,7 @@
                 android:text="@string/dialog_warning_number"
                 android:paddingLeft="5dp"
                 android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/et_number"
                 app:layout_constraintTop_toBottomOf="@+id/et_date"
                 app:layout_constraintStart_toStartOf="@+id/et_name"
                 app:layout_constraintEnd_toEndOf="@+id/et_name"
@@ -107,12 +109,12 @@
                 android:layout_height="@dimen/dialog_edittext_height"
                 android:layout_marginTop="@dimen/dialog_margin"
                 android:paddingLeft="@dimen/dialog_margin"
-                android:background="@drawable/shape_dialog_et"
+                android:background="@drawable/shape_dialog_editext"
                 android:hint="Address"
                 android:inputType="text"
-                app:layout_constraintTop_toBottomOf="@+id/tv_date_warning"
-                app:layout_constraintStart_toStartOf="@+id/et_date"
-                app:layout_constraintEnd_toEndOf="@+id/et_date"
+                app:layout_constraintTop_toBottomOf="@+id/tv_number_warning"
+                app:layout_constraintStart_toStartOf="@+id/et_number"
+                app:layout_constraintEnd_toEndOf="@+id/et_number"
                 style="@style/dialog.edittext"/>
 
             <TextView
@@ -120,7 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="@string/dialog_warning_address"
+                android:text="@string/dialog_warning_remind_time"
                 android:paddingLeft="5dp"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/et_address"
