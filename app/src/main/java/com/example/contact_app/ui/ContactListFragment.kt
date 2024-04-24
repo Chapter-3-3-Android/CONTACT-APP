@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
@@ -17,6 +19,7 @@ class ContactListFragment : Fragment() {
 
         var favoriteList = mutableListOf<User>()  //!!!!!!!!!!!!!!!!!!!! fragment 에 정의하니 mypage fragment로 이동하고 다시오면 favoritelist가 초기화 되는 문제 model에서 정의해야 할 듯
         var copyContactList = mutableListOf<User>()
+
     }
 
     private var _binding: FragmentContactListBinding? = null
@@ -41,10 +44,10 @@ class ContactListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        for (x in 0 until UserProvider.users.size){
+            copyContactList.add(UserProvider.users[x])
+        }
 
-       for(x in 0 until UserProvider.users.size){
-           copyContactList.add(UserProvider.users[x])
-       }
 
 
 
@@ -65,7 +68,7 @@ class ContactListFragment : Fragment() {
 
 
 
-        val adapterOfContactList = MyAdapter(UserProvider.users,1)
+        val adapterOfContactList = MyAdapter(copyContactList,1)
         val adapterOfFavoriteList = MyAdapter(favoriteList,2) // contact list 에서 좋아요 버튼을 눌러추가한 데이터들
         binding.contactListView.adapter = adapterOfContactList
         binding.favoriteListView.adapter = adapterOfFavoriteList
@@ -73,19 +76,13 @@ class ContactListFragment : Fragment() {
 
         binding.contactListView.layoutManager = LinearLayoutManager(context)
         binding.favoriteListView.layoutManager = LinearLayoutManager(context)
-
+//        val dividerItemDecoration = DividerItemDecoration(requireContext(), VERTICAL)
+//        binding.contactListView.addItemDecoration(dividerItemDecoration)
+//        binding.favoriteListView.addItemDecoration(dividerItemDecoration)
 
         adapterOfContactList.clickToMypage = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int, type:Int) {
-//                var newPosition:Int = position
-
-//                if(type != 1){
-//                    for (x in 0 until UserPrivider.users.size) {
-//                        if(UserPrivider.users[position] == UserPrivider.users[x]) {
-//                            newPosition = x
-//                        }
-//                    }
-//                }
+//
 
                 val bundle = Bundle()
                 bundle.putInt("position", position)
@@ -102,28 +99,28 @@ class ContactListFragment : Fragment() {
 
         adapterOfContactList.clickToLike = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int,type:Int) {
-                if (UserProvider.users[position].isFavorite == false) {
+
                     if(type == 1){
-                        copyContactList?.removeAt(position)
-                        binding.contactListView.adapter?.notifyItemRemoved(position )
-
-                    }
-                    UserProvider.switchFavoriteByUser(position)
-
-                        favoriteList?.add(UserProvider.users[position])
+                        //copycontactlist에서 에서 아이템을 가져온다 : copycontactlist에있는 것을 copy해 list에 추가
+                        // copylist의 하트를 바꾼다 copyContactList.
+                        favoriteList?.add(copyContactList[position])
+                        favoriteList[favoriteList.size - 1] = favoriteList[favoriteList.size - 1].copy(isFavorite = true)
                         binding.favoriteListView.adapter?.notifyDataSetChanged()
 
+                        copyContactList?.removeAt(position)
+                        binding.contactListView.adapter?.notifyItemRangeRemoved(position,
+                            copyContactList.size- position)
 
-                   }
 
+                    }
+                    else{
 
-
-
-                }
+                    }
             }
-
-
         }
+
+
+    }
 
 
 
