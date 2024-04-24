@@ -33,6 +33,14 @@ class ContactActivity : AppCompatActivity() {
         setTabLayout()
     }
 
+
+    fun switchTabPosition() {
+        val prePosition = binding.tlItems.selectedTabPosition
+        val postPosition = if (binding.tlItems.selectedTabPosition == 0) 1 else 0
+
+        adapter.notifyItemMoved(prePosition, postPosition)
+    }
+
     private fun setTabLayout() {
         with(binding) {
             // TabLayoutMediator를 통해서 TabLayout과 ViewPager2를 연동함
