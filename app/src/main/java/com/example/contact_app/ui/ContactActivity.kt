@@ -7,11 +7,13 @@ import com.example.contact_app.databinding.ActivityContactBinding
 import com.example.contact_app.ui.adapter.ViewPagerFragmentAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 
+
 class ContactActivity : AppCompatActivity() {
     private val binding: ActivityContactBinding by lazy {
         ActivityContactBinding.inflate(layoutInflater)
     }
 
+    private lateinit var adapter: ViewPagerFragmentAdapter
     private val tabTexts = listOf("Contacts", "My Page")
     private val tabIcons = listOf(R.drawable.ic_contacts, R.drawable.ic_user)
 
@@ -19,8 +21,13 @@ class ContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this)
-        binding.vpItems.adapter = viewPagerFragmentAdapter
+        adapter = ViewPagerFragmentAdapter(this)
+
+        adapter.getFragment() {
+            switchTabPosition()
+        }
+
+        binding.vpItems.adapter = adapter
 
         setTabLayout()
     }
@@ -34,5 +41,12 @@ class ContactActivity : AppCompatActivity() {
                 tab.setIcon(tabIcons[position])
             }.attach()
         }
+    }
+
+    private fun switchTabPosition() {
+        val prePosition = binding.tlItems.selectedTabPosition
+        val postPosition = if (prePosition == 0) 1 else 0
+
+        adapter.notifyItemMoved(prePosition, postPosition)
     }
 }
