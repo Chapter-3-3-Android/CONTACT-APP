@@ -24,6 +24,10 @@ class ContactListFragment : Fragment() {
 
     private lateinit var onClickListener: () -> Unit
 
+    fun onClickListener1(onClick: () -> Unit){
+        onClickListener = onClick
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -55,6 +59,7 @@ class ContactListFragment : Fragment() {
         binding.tvPhoneNumber.text = my.phoneNumber
 
         binding.MyProfileView.setOnClickListener {
+            onClickListener()
 
         }
 
