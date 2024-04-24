@@ -9,6 +9,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class ContactActivity : AppCompatActivity() {
+
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
@@ -22,6 +23,11 @@ class ContactActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = ViewPagerFragmentAdapter(this)
+
+        adapter.getFragment() {
+            switchTabPosition()
+        }
+
         binding.vpItems.adapter = adapter
 
         setTabLayout()
@@ -44,5 +50,12 @@ class ContactActivity : AppCompatActivity() {
                 tab.setIcon(tabIcons[position])
             }.attach()
         }
+    }
+
+    private fun switchTabPosition() {
+        val prePosition = binding.tlItems.selectedTabPosition
+        val postPosition = if (prePosition == 0) 1 else 0
+
+        adapter.notifyItemMoved(prePosition, postPosition)
     }
 }
