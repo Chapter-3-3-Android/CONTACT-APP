@@ -136,11 +136,11 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
         when {
             text.validEmail() -> {
                 binding.tvEmailWarning.visibility = View.INVISIBLE
-                nameEnable = true
+                emailEnable = true
             }
             else -> {
                 binding.tvNameWarning.visibility = View.VISIBLE
-                nameEnable = false
+                emailEnable = false
             }
         }
     }
