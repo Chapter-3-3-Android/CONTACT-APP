@@ -14,6 +14,12 @@ object UserProvider {
         _users.add(user)
     }
 
+    fun addSchedule(userIndex: Int, newSchedule: Schedule) {
+        _users[userIndex] = _users[userIndex].copy(
+            schedule = newSchedule
+        )
+    }
+
     fun switchFavoriteByUser(index: Int) {
         _users[index] = _users[index].copy(
             isFavorite = !(_users[index].isFavorite)
