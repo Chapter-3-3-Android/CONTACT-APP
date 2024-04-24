@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.contact_app.R
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
-import com.example.contact_app.data.model.UserPrivider
+import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.ItemRecyclerviewBinding
 
 class MyAdapter(val mItems:List<User>,var listType:Int) : RecyclerView.Adapter<MyAdapter.Holder>(){
@@ -24,11 +24,22 @@ class MyAdapter(val mItems:List<User>,var listType:Int) : RecyclerView.Adapter<M
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         var newPosition:Int = 0
-        for (x in 0 until UserPrivider.users.size) {
-            if(UserPrivider.users[position].phoneNumber == UserPrivider.users[x].phoneNumber) {
-                newPosition = x
+        var count:Int = 0
+
+        for (x in 0 until UserProvider.users.size) {
+            count = 0
+            for(y in 0 until 10) {
+                if (mItems[position].phoneNumber[y] == UserProvider.users[x].phoneNumber[y]) {
+                    count++
+                }
             }
+            if (count == 10){
+                newPosition = x
+                break
+            }
+
         }
+
 
         holder.itemView.setOnClickListener {  //클릭이벤트추가부분
             clickToMypage?.onClick(it, newPosition, listType)
@@ -47,7 +58,7 @@ class MyAdapter(val mItems:List<User>,var listType:Int) : RecyclerView.Adapter<M
             is Image.ImageDrawable -> holder.profileImageView.setImageResource(image.drawable)
         }
         //if(listType == 1) {
-            when (UserPrivider.users[newPosition].isFavorite) {
+            when (UserProvider.users[newPosition].isFavorite) {
                 false -> holder.like.setImageResource(R.drawable.ic_like)
                 true -> holder.like.setImageResource(R.drawable.ic_pressed_like)
             }

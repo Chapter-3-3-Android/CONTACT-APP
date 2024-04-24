@@ -16,11 +16,13 @@ class ContactListFragment : Fragment() {
     companion object {
 
         var favoriteList = mutableListOf<User>()  //!!!!!!!!!!!!!!!!!!!! fragment 에 정의하니 mypage fragment로 이동하고 다시오면 favoritelist가 초기화 되는 문제 model에서 정의해야 할 듯
-        val copyContactList = mutableListOf<User>()
+        var copyContactList = mutableListOf<User>()
     }
 
     private var _binding: FragmentContactListBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var onClickListener: () -> Unit
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,17 +55,17 @@ class ContactListFragment : Fragment() {
         binding.tvPhoneNumber.text = my.phoneNumber
 
         binding.MyProfileView.setOnClickListener {
-            //switchTapPosition()
+
         }
 
 
 
-        val adapterOfContactList = MyAdapter(copyContactList,1)
+        val adapterOfContactList = MyAdapter(UserProvider.users,1)
         val adapterOfFavoriteList = MyAdapter(favoriteList,2) // contact list 에서 좋아요 버튼을 눌러추가한 데이터들
         binding.contactListView.adapter = adapterOfContactList
         binding.favoriteListView.adapter = adapterOfFavoriteList
 
-        binding.favoriteListView.layoutManager = LinearLayoutManager(context)
+
         binding.contactListView.layoutManager = LinearLayoutManager(context)
         binding.favoriteListView.layoutManager = LinearLayoutManager(context)
 
@@ -97,11 +99,11 @@ class ContactListFragment : Fragment() {
             override fun onClick(view: View, position: Int,type:Int) {
                 if (UserProvider.users[position].isFavorite == false) {
                     if(type == 1){
-                        copyContactList.removeAt(position)
-                        binding.contactListView.adapter?.notifyDataSetChanged()
+                        copyContactList?.removeAt(position)
+                        binding.contactListView.adapter?.notifyItemRemoved(position )
 
                     }
-                    switchFavoriteByUser(position)
+                    UserProvider.switchFavoriteByUser(position)
 
                         favoriteList?.add(UserProvider.users[position])
                         binding.favoriteListView.adapter?.notifyDataSetChanged()

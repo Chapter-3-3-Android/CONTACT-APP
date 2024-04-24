@@ -8,8 +8,8 @@
     <string name="previous">Previous</string>
 
     <!-- dialog -->
-    <string name="dialog_warning_name">이름을 입력해주세요. (1자 이상)</string>
-    <string name="dialog_warning_number">전화번호를 입력해주세요.</string>
+    <string name="dialog_warning_name">이름을 입력해주세요. (성 이름)</string>
+    <string name="dialog_warning_number">국가코드를 포함한 전화번호를 입력해주세요.</string>
     <string name="dialog_warning_email">이메일 주소를 입력해주세요.</string>
     <string name="dialog_warning_time">날짜를 입력해주세요.</string>
     <string name="dialog_warning_remind_time">리마인드 시간을 숫자로만 입력해주세요. (분 단위)</string>
