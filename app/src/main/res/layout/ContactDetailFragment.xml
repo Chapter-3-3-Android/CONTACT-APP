@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.MyPageFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/big_1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_contact_detail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Contacts"
+            android:textSize="29sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.516" />
+
+        <ImageView
+            android:id="@+id/img_option_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_option"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/big_1">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_sheep_detail"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="28dp"
+                android:src="@drawable/img_sheep"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_adress_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Seoul, Korea"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_sheep_detail" />
+
+            <TextView
+                android:id="@+id/tv_name_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Seoyoung Jeong"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_adress_detail" />
+
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/div3_detail"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+                <ImageView
+                    android:id="@+id/iv_phone_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/ic_phonenum"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_phone_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Phone number"
+                    android:textSize="17dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_phone_detail"
+                    app:layout_constraintStart_toEndOf="@+id/iv_phone_detail"
+                    app:layout_constraintTop_toTopOf="@+id/iv_phone_detail" />
+
+                <TextView
+                    android:id="@+id/tv_number_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="010-xxxx-xxxx"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tv_phone_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_phone_detail" />
+
+                <TextView
+                    android:id="@+id/tv_copy_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Copy"
+                    android:textColor="#1B72C0"
+                    android:textSize="17dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_number_detail"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_phone_detail" />
+
+
+                <ImageView
+                    android:id="@+id/iv_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:src="@drawable/ic_email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_number_detail" />
+
+                <TextView
+                    android:id="@+id/tv_email_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="Email"
+                    android:textSize="17dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_email"
+                    app:layout_constraintStart_toEndOf="@+id/iv_email"
+                    app:layout_constraintTop_toTopOf="@+id/iv_email" />
+
+                <TextView
+                    android:id="@+id/tv_detail_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="~~~~~@gmail.com"
+                    android:textSize="17dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tv_email_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_email_detail" />
+
+                <TextView
+                    android:id="@+id/tv_copy_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="Copy"
+                    android:textColor="#1B72C0"
+                    android:textSize="17dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_detail_email"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_email_detail" />
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/div1_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_detail_email" />
+
+                <TextView
+                    android:id="@+id/tv_event_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Event"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/div2_detail"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/div1_detail" />
+
+
+                <ImageView
+                    android:id="@+id/tv_plus_detail"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_plus"
+                    android:text="Copy"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_event_detail"
+                    app:layout_constraintEnd_toEndOf="@id/tv_copy_two"
+                    app:layout_constraintStart_toStartOf="@id/tv_copy_two"
+                    app:layout_constraintTop_toTopOf="@id/tv_event_detail" />
+
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/div2_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_event_detail" />
+
+
+                <TextView
+                    android:id="@+id/tv_no_event"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/gray_little"
+                    android:padding="16dp"
+                    android:paddingStart="27dp"
+                    android:text="No Event"
+                    android:textSize="17dp"
+                    android:textColor="@color/gray_deep"
+                    app:layout_constraintStart_toStartOf="@id/div2_detail"
+                    app:layout_constraintTop_toBottomOf="@id/div2_detail" />
+
+
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/div4_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_no_event" />
+
+
+                <TextView
+                    android:id="@+id/tv_account_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Account Linked"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/div4_detail" />
+
+
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:id="@+id/div5_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="@id/tv_account_detail"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_account_detail" />
+
+
+                <TextView
+                    android:id="@+id/tv_blog_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/gray_little"
+                    android:padding="16dp"
+                    android:paddingStart="27dp"
+                    android:text="Blog"
+                    android:textSize="17dp"
+                    app:layout_constraintStart_toStartOf="@id/div5_detail"
+                    app:layout_constraintTop_toBottomOf="@id/div5_detail" />
+
+
+                <ImageView
+                    android:id="@+id/iv_blog_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_blog"
+                    android:text="Copy"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_blog_detail"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_plus_detail"
+                    app:layout_constraintStart_toStartOf="@+id/tv_plus_detail"
+                    app:layout_constraintTop_toTopOf="@id/tv_blog_detail" />
+
+
+                <TextView
+                    android:id="@+id/tv_git_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/gray_little"
+                    android:padding="16dp"
+                    android:paddingStart="27dp"
+                    android:text="Github"
+                    android:textSize="17dp"
+                    app:layout_constraintStart_toStartOf="@id/tv_blog_detail"
+                    app:layout_constraintTop_toBottomOf="@id/tv_blog_detail" />
+
+
+                <ImageView
+                    android:id="@+id/iv_git_detail"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_git"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_git_detail"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_blog_detail"
+                    app:layout_constraintStart_toStartOf="@+id/iv_blog_detail"
+                    app:layout_constraintTop_toTopOf="@+id/tv_git_detail" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_detail">
+
+                <ImageView
+                    android:id="@+id/img_telephone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_telephone" />
+
+                <ImageView
+                    android:id="@+id/img_sms"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_sms" />
+
+                <ImageView
+                    android:id="@+id/img_video"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_video" />
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
