@@ -63,18 +63,16 @@ class MyPageFragment : Fragment() {
         }
         val firstUser = UserProvider.users.firstOrNull()
         firstUser?.let { user ->
-            displayUserInfo(user.name, user.phoneNumber, user.email, user.blogLink, user.githubLink) // type mismatch 에러
+            displayUserInfo(user.name, user.phoneNumber, user.email, user.blogLink, user.githubLink)
         }
     }
 
-    fun displayUserInfo(
-        name: String, phoneNumber: String, email: String, blog: String, github: String
-    ) {
+    fun displayUserInfo(name: String, phoneNumber: String, email: String, blogLink: String?, githubLink: String?) {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
-        binding.tvBlog.text = blog
-        binding.tvGit.text = github
+        binding.tvBlog.text = blogLink
+        binding.tvGit.text = githubLink
     }
 
     override fun onDestroyView() {
