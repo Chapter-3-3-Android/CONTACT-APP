@@ -9,12 +9,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.contact_app.R
+import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
-import java.net.URI
 
 class ContactDetailFragment : Fragment() {
 
@@ -24,8 +26,12 @@ class ContactDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //키값으로 데이터 받아옴
         arguments?.let {
             position = it.getInt("position")
+        }
+        if(position == null) {
+            position = 0
         }
     }
     override fun onCreateView(
@@ -38,18 +44,44 @@ class ContactDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //전달받은 position 데이터값 ui에 binding
         position?.let { pos ->
 
             val detailData: User = UserProvider.users[position!!]
+            val image = detailData.profileImage
             binding.apply {
                 tvName.text = detailData.name
                 tvNumberPhone.text = detailData.phoneNumber
-                imgSheep.setImageURI(Uri.parse(detailData.profileImage.toString()))
+                when(image) {
+                    is Image.ImageDrawable -> imgSheep.setImageResource(image.drawable)
+                    is Image.ImageUri -> imgSheep.setImageURI(image.uri)
+                }
                 tvDetailEmail.text = detailData.email
                 tvBlog.text = detailData.blogLink
                 tvGit.text = detailData.githubLink
 
             }
+        }
+
+        val popupMenu = PopupMenu(requireContext(), binding.imgOption)
+        popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.action_correction -> {
+                    //수정 기능 구현 추가
+                    true
+                }
+                R.id.action_delete -> {
+                    //삭제 기능 구현 추가
+                    true
+                }
+                else -> false
+            }
+        }
+
+        binding.imgOption.setOnClickListener {
+            popupMenu.show()
         }
 
         //전화아이콘 눌렀을때 연결
