@@ -63,7 +63,28 @@ class ContactDetailFragment : Fragment() {
             }
         }
 
+        val popupMenu = PopupMenu(requireContext(), binding.imgOption)
+        popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when(menuItem.itemId) {
+                R.id.action_correction -> {
+                    //dialog 띄우고 확인 누르면 수정 기능 구현 추가
+                    true
+                }
+                R.id.action_delete -> {
+                    //dialog 띄우고 확인 누르면 삭제 기능 구현 추가
+                    position?.let { UserProvider.test(it) }
+                    true
+                }
+                else -> false
+            }
+        }
+
         with(binding) {
+            imgOption.setOnClickListener {
+                popupMenu.show()
+            }
             //전화아이콘 눌렀을때 연결
             imgTelephone.setOnClickListener {
                 openTelephone(tvNumberPhone.text.toString())
