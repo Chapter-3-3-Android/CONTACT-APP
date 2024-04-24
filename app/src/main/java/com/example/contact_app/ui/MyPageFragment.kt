@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
@@ -23,13 +24,12 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        
         //전화아이콘 눌렀을때 연결
         binding.imgTelephone.setOnClickListener {
             openTelephone(binding.tvPhone.text.toString())
@@ -59,6 +59,16 @@ class MyPageFragment : Fragment() {
         binding.ivGit.setOnClickListener {
             openLink(binding.tvPhone.text.toString())
         }
+        val firstUser = UserProvider.users.firstOrNull()
+        firstUser?.let { user ->
+            displayUserInfo(user.name, user.phoneNumber, user.email)
+        }
+    }
+
+    fun displayUserInfo(name: String, phoneNumber: String, email: String) {
+        binding.tvName.text = name
+        binding.tvNumberPhone.text = phoneNumber
+        binding.tvDetailEmail.text = email
     }
 
     override fun onDestroyView() {
