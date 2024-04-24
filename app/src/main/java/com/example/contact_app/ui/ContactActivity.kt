@@ -9,8 +9,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 
 class ContactActivity : AppCompatActivity() {
+
     private val binding: ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    companion object {
+
     }
 
     private lateinit var adapter: ViewPagerFragmentAdapter
@@ -27,14 +32,6 @@ class ContactActivity : AppCompatActivity() {
         setTabLayout()
     }
 
-
-    fun switchTabPosition() {
-        val prePosition = binding.tlItems.selectedTabPosition
-        val postPosition = if (binding.tlItems.selectedTabPosition == 0) 1 else 0
-
-        adapter.notifyItemMoved(prePosition, postPosition)
-    }
-
     private fun setTabLayout() {
         with(binding) {
             // TabLayoutMediator를 통해서 TabLayout과 ViewPager2를 연동함
@@ -44,5 +41,12 @@ class ContactActivity : AppCompatActivity() {
                 tab.setIcon(tabIcons[position])
             }.attach()
         }
+    }
+
+    fun switchTabPosition() {
+        val prePosition = binding.tlItems.selectedTabPosition
+        val postPosition = if (prePosition == 0) 1 else 0
+
+        adapter.notifyItemMoved(prePosition, postPosition)
     }
 }
