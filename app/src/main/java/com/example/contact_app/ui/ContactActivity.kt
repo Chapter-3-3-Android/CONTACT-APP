@@ -15,7 +15,10 @@ class ContactActivity : AppCompatActivity() {
 
     private lateinit var adapter: ViewPagerFragmentAdapter
     private val tabTexts = listOf("Contacts", "My Page")
-    private val tabIcons = listOf(R.drawable.ic_contacts, R.drawable.ic_user)
+    private val tabIcons = listOf(
+        R.drawable.selector_contact_ic,
+        R.drawable.selector_mypage_ic
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
