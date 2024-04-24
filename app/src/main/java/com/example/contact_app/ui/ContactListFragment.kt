@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contact_app.R
+import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserPrivider
 
@@ -14,10 +15,9 @@ import com.example.contact_app.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
     companion object {
-        var mapOfContact = mutableMapOf<String,User>()
 
-        var findFavoritePosition = mutableListOf<Int>()
         var favoriteList = mutableListOf<User>()  //!!!!!!!!!!!!!!!!!!!! fragment 에 정의하니 mypage fragment로 이동하고 다시오면 favoritelist가 초기화 되는 문제 model에서 정의해야 할 듯
+        val copyContactList = mutableListOf<User>()
     }
 
     private var _binding: FragmentContactListBinding? = null
@@ -35,40 +35,82 @@ class ContactListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        for (x in 0 until UserPrivider.users.size) {
-            mapOfContact.put(UserPrivider.users[x].phoneNumber,UserPrivider.users[x])
-        }// 전체 연락처 리스트의 정보를 키값을 핸드폰번호로 한 map 에 저장
 
-        val adapterOfContactList = MyAdapter(UserPrivider.users,1)
+
+       for(x in 0 until UserPrivider.users.size){
+           copyContactList.add(UserPrivider.users[x])
+       }
+
+
+
+        val my : User = UserPrivider.users[0]
+        val image = my.profileImage
+
+        when(image){
+            is Image.ImageUri -> binding.ivProfile.setImageURI(image.uri)
+            is Image.ImageDrawable -> binding.ivProfile.setImageResource(image.drawable)
+        }
+        binding.tvUsername.text = my.name
+        binding.tvPhoneNumber.text = my.phoneNumber
+
+        binding.MyProfileView.setOnClickListener {
+            //switchTapPosition()
+        }
+
+
+
+        val adapterOfContactList = MyAdapter(copyContactList,1)
         val adapterOfFavoriteList = MyAdapter(favoriteList,2) // contact list 에서 좋아요 버튼을 눌러추가한 데이터들
         binding.contactListView.adapter = adapterOfContactList
-
         binding.favoriteListView.adapter = adapterOfFavoriteList
+
+        binding.favoriteListView.layoutManager = LinearLayoutManager(context)
         binding.contactListView.layoutManager = LinearLayoutManager(context)
         binding.favoriteListView.layoutManager = LinearLayoutManager(context)
+
+
         adapterOfContactList.clickToMypage = object : MyAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
+            override fun onClick(view: View, position: Int, type:Int) {
+//                var newPosition:Int = position
+
+//                if(type != 1){
+//                    for (x in 0 until UserPrivider.users.size) {
+//                        if(UserPrivider.users[position] == UserPrivider.users[x]) {
+//                            newPosition = x
+//                        }
+//                    }
+//                }
 
                 val bundle = Bundle()
-                bundle.putInt("key", position)
-                val MyPageDataSent =
-                    MyPageFragment.newInstance(bundle) // onClick함수를 adapter에 적용하여 mypage로 Bundle 데이터 넘김!!!!!!!!!!! mypage에 new instance companion object 생성
+                bundle.putInt("position", position)
+                val ContactDetailDataSent =
+                   MyPageFragment.newInstance(bundle) // onClick함수를 adapter에 적용하여 mypage로 Bundle 데이터 넘김!!!!!!!!!!! mypage에 new instance companion object 생성
 
                 requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_frag, MyPageDataSent)
+                    .replace(R.id.fl_frag, ContactDetailDataSent)
                     .addToBackStack(null)
                     .commit() //mypage로 이동
             }
         }
 
+
         adapterOfContactList.clickToLike = object : MyAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
+            override fun onClick(view: View, position: Int,type:Int) {
                 if (UserPrivider.users[position].isFavorite == false) {
-                    //UserPrivider.switchFavoriteByUser(position)//!!!!!!!!!!!!!!!!!!!!!!!!!
-                    favoriteList?.add(UserPrivider.users[position]) // click 시 favoritelist에 클릭한 유저를 추가함
-                    //!!!!!!!!!!!!!!!!!!!! userdata의 isfavorite 부분 var로 바꿔야될듯??
-                    binding.favoriteListView.adapter?.notifyDataSetChanged()
-                    binding.contactListView.adapter?.notifyDataSetChanged()
+                    if(type == 1){
+                        copyContactList.removeAt(position)
+                        binding.contactListView.adapter?.notifyDataSetChanged()
+
+                    }
+                    switchFavoriteByUser(position)
+
+                        favoriteList?.add(UserPrivider.users[position])
+                        binding.favoriteListView.adapter?.notifyDataSetChanged()
+
+
+                   }
+
+
 
 
                 }
@@ -76,13 +118,20 @@ class ContactListFragment : Fragment() {
 
 
         }
-    }
+
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    fun switchFavoriteByUser(index: Int) {
+        UserPrivider.users[index].copy(
+            isFavorite = !( UserPrivider.users[index].isFavorite)
+        )
+    }
+}
 
 //    companion object {
 //        private var INSTANCE: ContactListFragment? = null
@@ -99,4 +148,4 @@ class ContactListFragment : Fragment() {
 //            }
 //        }
 //    }
-}
+

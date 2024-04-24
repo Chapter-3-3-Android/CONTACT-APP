@@ -13,7 +13,7 @@ import com.example.contact_app.databinding.ItemRecyclerviewBinding
 class MyAdapter(val mItems:List<User>,var listType:Int) : RecyclerView.Adapter<MyAdapter.Holder>(){
 
     interface ItemClick{
-        fun onClick(view:View,position:Int)
+        fun onClick(view:View,position:Int,type:Int)
     }
     var clickToMypage:ItemClick? = null  //recyclerview의 item항목에는 아이템을 눌렀을 때 mypage로 넘어가게 하는 버튼,
     var clickToLike:ItemClick? = null // 좋아요를 누르는 버튼이 있다.
@@ -23,13 +23,20 @@ class MyAdapter(val mItems:List<User>,var listType:Int) : RecyclerView.Adapter<M
     }
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
+        var newPosition:Int = 0
+        for (x in 0 until UserPrivider.users.size) {
+            if(UserPrivider.users[position].phoneNumber == UserPrivider.users[x].phoneNumber) {
+                newPosition = x
+            }
+        }
+
         holder.itemView.setOnClickListener {  //클릭이벤트추가부분
-            clickToMypage?.onClick(it, position)
+            clickToMypage?.onClick(it, newPosition, listType)
 
         }
        // if (listType ==1) {
             holder.like.setOnClickListener {  // 좋아요를 클릭하면
-                clickToLike?.onClick(it,   position)
+                clickToLike?.onClick(it,newPosition,listType)
 
             }
       //  }
@@ -40,7 +47,7 @@ class MyAdapter(val mItems:List<User>,var listType:Int) : RecyclerView.Adapter<M
             is Image.ImageDrawable -> holder.profileImageView.setImageResource(image.drawable)
         }
         //if(listType == 1) {
-            when (UserPrivider.users[position].isFavorite) {
+            when (UserPrivider.users[newPosition].isFavorite) {
                 false -> holder.like.setImageResource(R.drawable.ic_like)
                 true -> holder.like.setImageResource(R.drawable.ic_pressed_like)
             }
