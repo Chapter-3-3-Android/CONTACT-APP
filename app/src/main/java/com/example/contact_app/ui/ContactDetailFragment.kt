@@ -14,12 +14,20 @@ import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
+import java.net.URI
 
-class MyPageFragment : Fragment() {
+class ContactDetailFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
+    private var position: Int? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            position = it.getInt("position")
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -30,6 +38,19 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        position?.let { pos ->
+
+            val detailData: User = UserProvider.users[position!!]
+            binding.apply {
+                tvName.text = detailData.name
+                tvNumberPhone.text = detailData.phoneNumber
+                imgSheep.setImageURI(Uri.parse(detailData.profileImage.toString()))
+                tvDetailEmail.text = detailData.email
+                tvBlog.text = detailData.blogLink
+                tvGit.text = detailData.githubLink
+
+            }
+        }
 
         //전화아이콘 눌렀을때 연결
         binding.imgTelephone.setOnClickListener {
@@ -48,28 +69,18 @@ class MyPageFragment : Fragment() {
 
         //copy 버튼 눌렀을때 복사(이메일)
         binding.tvCopyEmail.setOnClickListener {
-            copyText(binding.tvNumberPhone.text.toString())
+            copyText(binding.tvDetailEmail.text.toString())
         }
 
         //blog아이콘 눌렀을때 연결
         binding.ivBlog.setOnClickListener {
-            openLink(binding.tvNumberPhone.text.toString())
+            openLink(binding.tvBlog.text.toString())
         }
 
         //github아이콘 눌렀을때 연결
         binding.ivGit.setOnClickListener {
-            openLink(binding.tvNumberPhone.text.toString())
+            openLink(binding.tvGit.text.toString())
         }
-        val firstUser = UserProvider.users.firstOrNull()
-        firstUser?.let { user ->
-            displayUserInfo(user.name, user.phoneNumber, user.email)
-        }
-    }
-
-    fun displayUserInfo(name: String, phoneNumber: String, email: String) {
-        binding.tvName.text = name
-        binding.tvNumberPhone.text = phoneNumber
-        binding.tvDetailEmail.text = email
     }
 
     override fun onDestroyView() {
@@ -98,5 +109,13 @@ class MyPageFragment : Fragment() {
     private fun openLink(text: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
         startActivity(intent)
+    }
+
+    companion object {
+        fun newInstance(bundle: Bundle): ContactDetailFragment {
+            val fragment = ContactDetailFragment()
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 }

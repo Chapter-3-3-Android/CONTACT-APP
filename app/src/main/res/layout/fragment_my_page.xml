@@ -14,18 +14,6 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-
-
-        <ImageView
-            android:id="@+id/img_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_contact"
             android:layout_width="0dp"
@@ -45,7 +33,7 @@
             android:id="@+id/img_option"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="37dp"
             android:src="@drawable/ic_option"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -321,6 +309,7 @@
                     android:layout_marginTop="4dp"
                     android:background="@color/gray_little"
                     android:padding="16dp"
+                    android:paddingStart="27dp"
                     android:text="Github"
                     android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@id/tv_blog"
