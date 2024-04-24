@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
 private const val ARG_PARAM1 = "param1"
@@ -18,18 +19,29 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val firstUser = UserProvider.users.firstOrNull()
+        firstUser?.let { user ->
+            displayUserInfo(user.name, user.phoneNumber, user.email)
+        }
+    }
+
+    fun displayUserInfo(name: String, phoneNumber: String, email: String) {
+        binding.tvName.text = name
+        binding.tvNumberPhone.text = phoneNumber
+        binding.tvDetailEmail.text = email
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
     companion object {
 
         //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가

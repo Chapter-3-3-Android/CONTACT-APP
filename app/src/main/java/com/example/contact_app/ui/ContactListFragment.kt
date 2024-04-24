@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.contact_app.R
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
-import com.example.contact_app.data.model.UserPrivider
+import com.example.contact_app.data.model.UserProvider
 
 import com.example.contact_app.databinding.FragmentContactListBinding
 
@@ -37,13 +36,13 @@ class ContactListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-       for(x in 0 until UserPrivider.users.size){
-           copyContactList.add(UserPrivider.users[x])
+       for(x in 0 until UserProvider.users.size){
+           copyContactList.add(UserProvider.users[x])
        }
 
 
 
-        val my : User = UserPrivider.users[0]
+        val my : User = UserProvider.users[0]
         val image = my.profileImage
 
         when(image){
@@ -86,17 +85,17 @@ class ContactListFragment : Fragment() {
                 val ContactDetailDataSent =
                    MyPageFragment.newInstance(bundle) // onClick함수를 adapter에 적용하여 mypage로 Bundle 데이터 넘김!!!!!!!!!!! mypage에 new instance companion object 생성
 
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fl_frag, ContactDetailDataSent)
-                    .addToBackStack(null)
-                    .commit() //mypage로 이동
+//                requireActivity().supportFragmentManager.beginTransaction()
+//                    .replace(R.id.fl_flag, ContactDetailDataSent)
+//                    .addToBackStack(null)
+//                    .commit() //mypage로 이동
             }
         }
 
 
         adapterOfContactList.clickToLike = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int,type:Int) {
-                if (UserPrivider.users[position].isFavorite == false) {
+                if (UserProvider.users[position].isFavorite == false) {
                     if(type == 1){
                         copyContactList.removeAt(position)
                         binding.contactListView.adapter?.notifyDataSetChanged()
@@ -104,7 +103,7 @@ class ContactListFragment : Fragment() {
                     }
                     switchFavoriteByUser(position)
 
-                        favoriteList?.add(UserPrivider.users[position])
+                        favoriteList?.add(UserProvider.users[position])
                         binding.favoriteListView.adapter?.notifyDataSetChanged()
 
 
@@ -127,8 +126,8 @@ class ContactListFragment : Fragment() {
     }
 
     fun switchFavoriteByUser(index: Int) {
-        UserPrivider.users[index].copy(
-            isFavorite = !( UserPrivider.users[index].isFavorite)
+        UserProvider.users[index].copy(
+            isFavorite = !( UserProvider.users[index].isFavorite)
         )
     }
 }

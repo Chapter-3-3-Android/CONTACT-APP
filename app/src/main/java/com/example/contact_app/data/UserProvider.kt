@@ -1,17 +1,26 @@
 package com.example.contact_app.data.model
 
 import com.example.contact_app.R
-import java.util.Locale
-import kotlin.random.Random
 
-object UserPrivider {
-    var users: List<User>
+object UserProvider {
+    private var _users: MutableList<User>
+    val users: List<User> get() = _users
 
     init {
-        users = createDummyUsers()
+        _users = createDummyUsers()
     }
 
-    fun createDummyUsers(): List<User> {
+    fun addUser(user: User) {
+        _users.add(user)
+    }
+
+    fun switchFavoriteByUser(index: Int) {
+        _users[index] = _users[index].copy(
+            isFavorite = !(_users[index].isFavorite)
+        )
+    }
+
+    private fun createDummyUsers(): MutableList<User> {
         val users = mutableListOf<User>()
         val firstNames = listOf("James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth")
         val lastNames = listOf("Smith", "Johnson", "Williams", "Jones", "Brown", "Davis", "Miller", "Wilson", "Moore", "Taylor")
@@ -20,7 +29,7 @@ object UserPrivider {
             val firstName = firstNames.random()
             val lastName = lastNames.random()
             val phoneNumber = "+233 ${(1000..9999).random()} ${(10..99).random()} ${(100..999).random()}"
-            val email = "${firstName.lowercase()}.${lastName.lowercase()}${i}@example.com"
+            val email = "${firstName.lowercase()}${lastName.lowercase()}${i}@example.com"
 
             val user = User(
                 name = "$firstName $lastName",
