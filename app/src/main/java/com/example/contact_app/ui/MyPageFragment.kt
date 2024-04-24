@@ -1,5 +1,6 @@
 package com.example.contact_app.ui
 
+import android.app.AlertDialog
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -30,45 +31,56 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        binding.tvPlus.setOnClickListener {
+            showDialog() }
+
+
+        }
+
+
+
         //전화아이콘 눌렀을때 연결
         binding.imgTelephone.setOnClickListener {
-            openTelephone(binding.tvPhone.text.toString())
+            openTelephone(binding.tvNumberPhone.text.toString())
         }
 
         //문자아이콘 눌렀을때 연결
         binding.imgSms.setOnClickListener {
-            openMessenger(binding.tvPhone.text.toString())
+            openMessenger(binding.tvNumberPhone.text.toString())
         }
 
         //copy 버튼 눌렀을때 복사(전화번호)
         binding.tvCopyPhone.setOnClickListener {
-            copyText(binding.tvPhone.text.toString())
+            copyText(binding.tvNumberPhone.text.toString())
         }
 
         //copy 버튼 눌렀을때 복사(이메일)
         binding.tvCopyEmail.setOnClickListener {
-            copyText(binding.tvPhone.text.toString())
+            copyText(binding.tvDetailEmail.text.toString())
         }
 
         //blog아이콘 눌렀을때 연결
         binding.ivBlog.setOnClickListener {
-            openLink(binding.tvPhone.text.toString())
+            openLink(binding.tvBlog.text.toString())
         }
 
         //github아이콘 눌렀을때 연결
         binding.ivGit.setOnClickListener {
-            openLink(binding.tvPhone.text.toString())
+            openLink(binding.tvGit.text.toString())
         }
         val firstUser = UserProvider.users.firstOrNull()
         firstUser?.let { user ->
-            displayUserInfo(user.name, user.phoneNumber, user.email)
+            displayUserInfo(user.name, user.phoneNumber, user.email, user.blogLink, user.githubLink )
         }
     }
 
-    fun displayUserInfo(name: String, phoneNumber: String, email: String) {
+    fun displayUserInfo(name: String, phoneNumber: String, email: String, blog:String, github:String) {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
+        binding.tvBlog.text = blog
+        binding.tvGit.text = github
     }
 
     override fun onDestroyView() {
