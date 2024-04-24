@@ -35,7 +35,7 @@
         app:shapeAppearance="?attr/circleRadius"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_add"
+        android:src="@drawable/ic_plus"
         app:maxImageSize="12dp"
         android:backgroundTint="@color/blue_light"
         app:rippleColor="@color/blue"
