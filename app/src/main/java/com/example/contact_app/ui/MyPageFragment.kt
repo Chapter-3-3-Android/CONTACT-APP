@@ -1,9 +1,15 @@
 package com.example.contact_app.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
@@ -23,10 +29,63 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //전화아이콘 눌렀을때 연결
+        binding.imgTelephone.setOnClickListener {
+            openTelephone(binding.tvPhone.text.toString())
+        }
+
+        //문자아이콘 눌렀을때 연결
+        binding.imgSms.setOnClickListener {
+            openMessenger(binding.tvPhone.text.toString())
+        }
+
+        //copy 버튼 눌렀을때 복사(전화번호)
+        binding.tvCopyPhone.setOnClickListener {
+            copyText(binding.tvPhone.text.toString())
+        }
+
+        //copy 버튼 눌렀을때 복사(이메일)
+        binding.tvCopyEmail.setOnClickListener {
+            copyText(binding.tvPhone.text.toString())
+        }
+
+        //blog아이콘 눌렀을때 연결
+        binding.ivBlog.setOnClickListener {
+            openLink(binding.tvPhone.text.toString())
+        }
+
+        //github아이콘 눌렀을때 연결
+        binding.ivGit.setOnClickListener {
+            openLink(binding.tvPhone.text.toString())
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun openTelephone(number: String) {
+        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
+        startActivity(intent)
+    }
+
+    private fun openMessenger(number: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("sms:$number"))
+        startActivity(intent)
+    }
+
+    private fun copyText(text: String) {
+        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText("label", text)
+        clipboard.setPrimaryClip(clip)
+
+        Toast.makeText(requireContext(), "클립보드에 복사되었습니다", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun openLink(text: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+        startActivity(intent)
     }
 }
