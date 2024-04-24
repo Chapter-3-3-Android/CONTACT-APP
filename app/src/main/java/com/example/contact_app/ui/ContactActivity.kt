@@ -14,10 +14,6 @@ class ContactActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    companion object {
-
-    }
-
     private lateinit var adapter: ViewPagerFragmentAdapter
     private val tabTexts = listOf("Contacts", "My Page")
     private val tabIcons = listOf(R.drawable.ic_contacts, R.drawable.ic_user)
@@ -27,6 +23,11 @@ class ContactActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         adapter = ViewPagerFragmentAdapter(this)
+
+        adapter.getFragment() {
+            switchTabPosition()
+        }
+
         binding.vpItems.adapter = adapter
 
         setTabLayout()
@@ -43,7 +44,7 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
-    fun switchTabPosition() {
+    private fun switchTabPosition() {
         val prePosition = binding.tlItems.selectedTabPosition
         val postPosition = if (prePosition == 0) 1 else 0
 
