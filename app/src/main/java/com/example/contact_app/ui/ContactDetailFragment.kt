@@ -66,27 +66,27 @@ class ContactDetailFragment : Fragment() {
         with(binding) {
             //전화아이콘 눌렀을때 연결
             imgTelephone.setOnClickListener {
-                openTelephone(binding.tvNumberPhone.text.toString())
+                openTelephone(tvNumberPhone.text.toString())
             }
             //문자아이콘 눌렀을때 연결
             imgSms.setOnClickListener {
-                openMessenger(binding.tvNumberPhone.text.toString())
+                openMessenger(tvNumberPhone.text.toString())
             }
             //copy 버튼 눌렀을때 복사(전화번호)
             tvCopyPhone.setOnClickListener {
-                copyText(binding.tvNumberPhone.text.toString())
+                copyText(tvNumberPhone.text.toString())
             }
             //copy 버튼 눌렀을때 복사(이메일)
             tvCopyEmail.setOnClickListener {
-                copyText(binding.tvDetailEmail.text.toString())
+                copyText(tvDetailEmail.text.toString())
             }
             //blog아이콘 눌렀을때 연결
             ivBlog.setOnClickListener {
-                openLink(binding.tvBlog.text.toString())
+                openLink(tvBlog.text.toString())
             }
             //github아이콘 눌렀을때 연결
             ivGit.setOnClickListener {
-                openLink(binding.tvGit.text.toString())
+                openLink(tvGit.text.toString())
             }
         }
     }
