@@ -29,7 +29,7 @@ class MyPageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
         //전화아이콘 눌렀을때 연결
         binding.imgTelephone.setOnClickListener {
             openTelephone(binding.tvPhone.text.toString())
