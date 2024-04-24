@@ -36,14 +36,10 @@ class MyPageFragment : Fragment() {
                 val dialog = AddScheduleDialogFragment() // 추가해야됨
                 dialog.show(parentFragmentManager, "AddScheduleDialog")
             }
-            //전화아이콘 눌렀을때 연결
-            imgTelephone.setOnClickListener {
-                openTelephone(tvNumberPhone.text.toString())
-            }
-            //문자아이콘 눌렀을때 연결
-            imgSms.setOnClickListener {
-                openMessenger(tvNumberPhone.text.toString())
-            }
+            //전화아이콘, 문자아이콘, 비디오아이콘 GONE
+            imgTelephone.visibility = View.GONE
+            imgSms.visibility = View.GONE
+            imgVideo.visibility = View.GONE
             //copy 버튼 눌렀을때 복사(전화번호)
             tvCopyPhone.setOnClickListener {
                 copyText(tvNumberPhone.text.toString())
@@ -78,16 +74,6 @@ class MyPageFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun openTelephone(number: String) {
-        val intent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:$number"))
-        startActivity(intent)
-    }
-
-    private fun openMessenger(number: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("sms:$number"))
-        startActivity(intent)
     }
 
     private fun copyText(text: String) {

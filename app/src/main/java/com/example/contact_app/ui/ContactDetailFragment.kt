@@ -118,12 +118,4 @@ class ContactDetailFragment : Fragment() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
         startActivity(intent)
     }
-
-//    companion object {
-//        fun newInstance(bundle: Bundle): ContactDetailFragment {
-//            val fragment = ContactDetailFragment()
-//            fragment.arguments = bundle
-//            return fragment
-//        }
-//    }
 }
