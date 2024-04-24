@@ -35,10 +35,9 @@ class MyPageFragment : Fragment() {
 
         binding.tvPlus.setOnClickListener {
             val dialog = AddScheduleDialogFragment()
-            dialog.show(parentFragmentManager,"AddScheduleDialog")
+            dialog.show(parentFragmentManager, "AddScheduleDialog")
 
-             }
-
+        }
 
 
         //전화아이콘 눌렀을때 연결
@@ -72,11 +71,13 @@ class MyPageFragment : Fragment() {
         }
         val firstUser = UserProvider.users.firstOrNull()
         firstUser?.let { user ->
-            displayUserInfo(user.name, user.phoneNumber, user.email, user.blogLink, user.githubLink )
+            displayUserInfo(user.name, user.phoneNumber, user.email, user.blogLink, user.githubLink)
         }
     }
 
-    fun displayUserInfo(name: String, phoneNumber: String, email: String, blog:String, github:String) {
+    fun displayUserInfo(
+        name: String, phoneNumber: String, email: String, blog: String, github: String
+    ) {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
@@ -100,7 +101,8 @@ class MyPageFragment : Fragment() {
     }
 
     private fun copyText(text: String) {
-        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip: ClipData = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
 
