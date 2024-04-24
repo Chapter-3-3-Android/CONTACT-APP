@@ -20,6 +20,10 @@ object UserProvider {
         )
     }
 
+    fun test(int: Int) {
+        _users.removeAt(int)
+    }
+
     private fun createDummyUsers(): MutableList<User> {
         val users = mutableListOf<User>()
         val firstNames = listOf("James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Michael", "Linda", "William", "Elizabeth")

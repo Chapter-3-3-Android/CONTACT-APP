@@ -45,7 +45,7 @@ class ContactDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //전달받은 position 데이터값 ui에 binding
-        position?.let { pos ->
+        position?.let {
 
             val detailData: User = UserProvider.users[position!!]
             val image = detailData.profileImage
@@ -63,55 +63,31 @@ class ContactDetailFragment : Fragment() {
             }
         }
 
-        val popupMenu = PopupMenu(requireContext(), binding.imgOption)
-        popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
-
-        popupMenu.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId) {
-                R.id.action_correction -> {
-                    //수정 기능 구현 추가
-                    true
-                }
-                R.id.action_delete -> {
-                    //삭제 기능 구현 추가
-                    true
-                }
-                else -> false
+        with(binding) {
+            //전화아이콘 눌렀을때 연결
+            imgTelephone.setOnClickListener {
+                openTelephone(binding.tvNumberPhone.text.toString())
             }
-        }
-
-        binding.imgOption.setOnClickListener {
-            popupMenu.show()
-        }
-
-        //전화아이콘 눌렀을때 연결
-        binding.imgTelephone.setOnClickListener {
-            openTelephone(binding.tvNumberPhone.text.toString())
-        }
-
-        //문자아이콘 눌렀을때 연결
-        binding.imgSms.setOnClickListener {
-            openMessenger(binding.tvNumberPhone.text.toString())
-        }
-
-        //copy 버튼 눌렀을때 복사(전화번호)
-        binding.tvCopyPhone.setOnClickListener {
-            copyText(binding.tvNumberPhone.text.toString())
-        }
-
-        //copy 버튼 눌렀을때 복사(이메일)
-        binding.tvCopyEmail.setOnClickListener {
-            copyText(binding.tvDetailEmail.text.toString())
-        }
-
-        //blog아이콘 눌렀을때 연결
-        binding.ivBlog.setOnClickListener {
-            openLink(binding.tvBlog.text.toString())
-        }
-
-        //github아이콘 눌렀을때 연결
-        binding.ivGit.setOnClickListener {
-            openLink(binding.tvGit.text.toString())
+            //문자아이콘 눌렀을때 연결
+            imgSms.setOnClickListener {
+                openMessenger(binding.tvNumberPhone.text.toString())
+            }
+            //copy 버튼 눌렀을때 복사(전화번호)
+            tvCopyPhone.setOnClickListener {
+                copyText(binding.tvNumberPhone.text.toString())
+            }
+            //copy 버튼 눌렀을때 복사(이메일)
+            tvCopyEmail.setOnClickListener {
+                copyText(binding.tvDetailEmail.text.toString())
+            }
+            //blog아이콘 눌렀을때 연결
+            ivBlog.setOnClickListener {
+                openLink(binding.tvBlog.text.toString())
+            }
+            //github아이콘 눌렀을때 연결
+            ivGit.setOnClickListener {
+                openLink(binding.tvGit.text.toString())
+            }
         }
     }
 
@@ -143,11 +119,11 @@ class ContactDetailFragment : Fragment() {
         startActivity(intent)
     }
 
-    companion object {
-        fun newInstance(bundle: Bundle): ContactDetailFragment {
-            val fragment = ContactDetailFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
+//    companion object {
+//        fun newInstance(bundle: Bundle): ContactDetailFragment {
+//            val fragment = ContactDetailFragment()
+//            fragment.arguments = bundle
+//            return fragment
+//        }
+//    }
 }
