@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.example.contact_app.R
+import com.example.contact_app.data.model.UserPrivider
+
 import com.example.contact_app.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -16,9 +18,11 @@ class ContactActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        UserPrivider.createDummyUsers()
         // Default로 ContactList Fragment가 뜨도록 추가함
         setFragment(ContactListFragment())
+        //val userList:List<User> = UserPrivider.createDummyUsers()
+
 
         // 프레임 레이아웃에 Fragment를 띄운다.
         with(binding) {
@@ -49,4 +53,9 @@ class ContactActivity : AppCompatActivity() {
             addToBackStack(null)
         }
     }
+
+
+
+
+
 }

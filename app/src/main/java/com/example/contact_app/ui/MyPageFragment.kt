@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
+private const val ARG_PARAM1 = "param1"
 class MyPageFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
@@ -28,5 +29,17 @@ class MyPageFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    companion object {
+
+        //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가
+        @JvmStatic
+        fun newInstance(param1: Bundle) =
+            MyPageFragment().apply {
+                arguments = Bundle().apply {
+                    putBundle(ARG_PARAM1, param1)
+
+                }
+            }
     }
 }
