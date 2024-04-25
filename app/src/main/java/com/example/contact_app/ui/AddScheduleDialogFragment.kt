@@ -1,9 +1,11 @@
 package com.example.contact_app.ui
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
@@ -12,6 +14,7 @@ import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentAddScheduleDialogBinding
 import com.example.contact_app.extension.ButtonClickListener
 import com.example.contact_app.extension.ValidExtension.validDate
+import com.example.contact_app.extension.ValidExtension.validName
 import com.example.contact_app.extension.ValidExtension.validRemindTime
 
 class AddScheduleDialogFragment(private val userIndex: Int, private val buttonClickListener: ButtonClickListener) : DialogFragment() {
@@ -24,25 +27,28 @@ class AddScheduleDialogFragment(private val userIndex: Int, private val buttonCl
                 etRemindTime
             )
         }
+    private var nameEnable = false
     private var dateEnable = false
     private var remindTimeEnable = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAddScheduleDialogBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val builder = AlertDialog.Builder(requireActivity())
+        val inflater = requireActivity().layoutInflater
+        binding = FragmentAddScheduleDialogBinding.inflate(inflater)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        builder.setView(binding.root)
+        with(binding) {
+            tvDialogTitle.setText("Add Schedule")
+            btnNegative.setOnClickListener {
+                dismiss()
+            }
+            btnPositive.setOnClickListener {
+                addSchedule()
+                buttonClickListener.onSaveButtonClick()
+                dismiss()
+            }
+        }
 
-        initView()
-    }
-
-    private fun initView() {
         editTexts.forEach { editText ->
             editText.addTextChangedListener {
                 editText.checkValidElements()
@@ -53,49 +59,35 @@ class AddScheduleDialogFragment(private val userIndex: Int, private val buttonCl
                 }
             }
         }
-        onClick()
+
+        return builder.create()
     }
 
-    private fun onClick() {
-        binding.btnNegative.setOnClickListener {
-            dismiss()
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
+    }
 
-        binding.btnPositive.setOnClickListener {
-            addSchedule()
-            buttonClickListener.onSaveButtonClick()
-            dismiss()
-        }
+    private fun checkValidName(text: String) {
+        nameEnable = text.validName()
+        binding.tvNameWarning.visibility = if (nameEnable) View.GONE else View.VISIBLE
     }
 
     private fun checkValidDate(text: String) {
-        when {
-            text.validDate() -> {
-                binding.tvDateWarning.visibility = View.INVISIBLE
-                remindTimeEnable = true
-            }
-            else -> {
-                binding.tvDateWarning.visibility = View.VISIBLE
-                remindTimeEnable = false
-            }
-        }
+        dateEnable = text.validDate()
+        binding.tvDateWarning.visibility = if (dateEnable) View.GONE else View.VISIBLE
     }
 
     private fun checkValidRemindTime(text: String) {
-        when {
-            text.validRemindTime() -> {
-                binding.tvRemindTimeWarning.visibility = View.INVISIBLE
-                remindTimeEnable = true
-            }
-            else -> {
-                binding.tvRemindTimeWarning.visibility = View.VISIBLE
-                remindTimeEnable = false
-            }
-        }
+        remindTimeEnable = text.validRemindTime()
+        binding.tvRemindTimeWarning.visibility = if (remindTimeEnable) View.GONE else View.VISIBLE
     }
 
     private fun EditText.checkValidElements() = with(binding) {
         when (this@checkValidElements) {
+            etName -> checkValidName(etName.text.toString())
             etDate -> checkValidDate(etDate.text.toString())
             etRemindTime -> checkValidRemindTime(etRemindTime.text.toString())
 
@@ -104,8 +96,8 @@ class AddScheduleDialogFragment(private val userIndex: Int, private val buttonCl
     }
 
     private fun isConfirmButtonEnable() {
-        binding.btnPositive.isEnabled = binding.etName.text.toString().isNotBlank()
-                && dateEnable
+        binding.btnPositive.isEnabled = nameEnable && dateEnable &&
+                (remindTimeEnable || binding.etRemindTime.text.isBlank())
     }
 
     private fun addSchedule() {
