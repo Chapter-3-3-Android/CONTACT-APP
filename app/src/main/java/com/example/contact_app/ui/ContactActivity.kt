@@ -10,6 +10,7 @@ import com.example.contact_app.R
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.ActivityContactBinding
 import com.example.contact_app.extension.ButtonClickListener
+import com.example.contact_app.databinding.ActivityMainBinding
 import com.example.contact_app.ui.adapter.ViewPagerFragmentAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 

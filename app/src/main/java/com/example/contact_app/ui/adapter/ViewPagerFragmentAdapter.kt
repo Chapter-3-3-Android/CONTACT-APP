@@ -18,7 +18,7 @@ class ViewPagerFragmentAdapter(
     override fun createFragment(position: Int): Fragment {
         return when(position) {
             0 -> contactListFragment
-            1 -> MyPageFragment()
+            1 -> ContactDetailFragment()
             else -> throw RuntimeException("현재 Fragment는 2개 입니다.")
         }
     }
