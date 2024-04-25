@@ -15,6 +15,7 @@ import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
 private const val ARG_PARAM1 = "param1"
+
 class MyPageFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
@@ -42,7 +43,7 @@ class MyPageFragment : Fragment() {
             imgTelephone.visibility = View.GONE
             imgSms.visibility = View.GONE
             imgVideo.visibility = View.GONE
-          
+
             // copy 버튼 눌렀을때 복사(전화번호)
             tvCopyPhone.setOnClickListener {
                 copyText(tvNumberPhone.text.toString())
@@ -66,7 +67,13 @@ class MyPageFragment : Fragment() {
         }
     }
 
-    fun displayUserInfo(name: String, phoneNumber: String, email: String, blogLink: String?, githubLink: String?) {
+    fun displayUserInfo(
+        name: String,
+        phoneNumber: String,
+        email: String,
+        blogLink: String?,
+        githubLink: String?,
+    ) {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
@@ -92,7 +99,7 @@ class MyPageFragment : Fragment() {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
         startActivity(intent)
     }
-    
+
     companion object {
         //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가
         @JvmStatic

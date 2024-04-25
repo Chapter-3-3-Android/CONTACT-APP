@@ -18,7 +18,10 @@ import com.example.contact_app.extension.ValidExtension.validDate
 import com.example.contact_app.extension.ValidExtension.validName
 import com.example.contact_app.extension.ValidExtension.validRemindTime
 
-class AddScheduleDialogFragment(private val userIndex: Int, private val buttonClickListener: ButtonClickListener) : DialogFragment() {
+class AddScheduleDialogFragment(
+    private val userIndex: Int,
+    private val buttonClickListener: ButtonClickListener,
+) : DialogFragment() {
     private lateinit var binding: FragmentAddScheduleDialogBinding
     private val editTexts
         get() = with(binding) {
@@ -94,8 +97,9 @@ class AddScheduleDialogFragment(private val userIndex: Int, private val buttonCl
 
     private fun isConfirmButtonEnable() {
         with(binding) {
-            btnPositive.isEnabled = nameEnable && dateEnable && (remindTimeEnable || etRemindTime.text.isBlank())
-            if(btnPositive.isEnabled){
+            btnPositive.isEnabled =
+                nameEnable && dateEnable && (remindTimeEnable || etRemindTime.text.isBlank())
+            if (btnPositive.isEnabled) {
                 btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark_clicked)
             } else {
                 btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark)

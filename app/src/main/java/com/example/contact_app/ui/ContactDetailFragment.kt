@@ -25,7 +25,7 @@ private const val ARG_PARAM1 = "position"
 class ContactDetailFragment : Fragment() {
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
-  
+
     private var position: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,10 +34,11 @@ class ContactDetailFragment : Fragment() {
         arguments?.let {
             position = it.getInt(ARG_PARAM1)
         }
-        if(position == null) {
+        if (position == null) {
             position = 0
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -56,7 +57,7 @@ class ContactDetailFragment : Fragment() {
             binding.apply {
                 tvName.text = detailData.name
                 tvNumberPhone.text = detailData.phoneNumber
-                when(image) {
+                when (image) {
                     is Image.ImageDrawable -> imgSheep.setImageResource(image.drawable)
                     is Image.ImageUri -> imgSheep.setImageURI(image.uri)
                 }
@@ -71,7 +72,7 @@ class ContactDetailFragment : Fragment() {
         popupMenu.menuInflater.inflate(R.menu.menu_main, popupMenu.menu)
 
         popupMenu.setOnMenuItemClickListener { menuItem ->
-            when(menuItem.itemId) {
+            when (menuItem.itemId) {
                 R.id.action_correction -> {
                     val builder = AlertDialog.Builder(requireContext())
                     builder.setTitle("프로필 수정")
@@ -80,20 +81,21 @@ class ContactDetailFragment : Fragment() {
 
                     val listener = object : DialogInterface.OnClickListener {
                         override fun onClick(dialog: DialogInterface?, which: Int) {
-                            when(which) {
+                            when (which) {
                                 DialogInterface.BUTTON_POSITIVE -> position?.let {
                                     // UserProvider.modifyUser(it)
                                 }
                             }
                         }
                     }
-                    
+
                     builder.setPositiveButton("확인", listener)
                     builder.setNegativeButton("취소", listener)
                     builder.show()
 
                     true
                 }
+
                 R.id.action_delete -> {
                     //dialog 띄우고 확인 누르면 삭제 기능 구현 추가
 
@@ -104,21 +106,21 @@ class ContactDetailFragment : Fragment() {
 
                     val listener = object : DialogInterface.OnClickListener {
                         override fun onClick(dialog: DialogInterface?, which: Int) {
-                            when(which) {
+                            when (which) {
                                 DialogInterface.BUTTON_POSITIVE -> position?.let {
                                     // UserProvider.deleteUser(it)
                                 }
                             }
                         }
                     }
-                    
+
                     builder.setPositiveButton("확인", listener)
                     builder.setNegativeButton("취소", listener)
                     builder.show()
 
                     true
                 }
-                
+
                 else -> false
             }
         }
@@ -170,7 +172,8 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun copyText(text: String) {
-        val clipboard = requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip: ClipData = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
 
