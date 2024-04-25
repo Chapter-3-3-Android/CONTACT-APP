@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.contact_app.R
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
@@ -72,9 +73,12 @@ class ContactListFragment : Fragment() {
 
         adapterOfContactList.clickToDetail = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int, type: Int) {
-                // onClick함수를 adapter에 적용하여 detailFragment로 Bundle 데이터 넘김
-                // TODO: ContactListFragment -> DetailFragment 전환 기능이 안 되어 있음
                 val detailFragment = ContactDetailFragment.newInstance(position)
+
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .replace(R.id.fl_items, detailFragment)
+                    .addToBackStack(null)
+                    .commit()
 
             }
         }
@@ -91,7 +95,6 @@ class ContactListFragment : Fragment() {
                         favoriteList[favoriteList.size - 1].copy(isFavorite = true)
                     binding.favoriteListView.adapter?.notifyDataSetChanged()
 
-
                     copyContactList?.removeAt(position)
                     binding.contactListView.adapter?.notifyItemRangeRemoved(
                         position,
@@ -99,8 +102,6 @@ class ContactListFragment : Fragment() {
                     )
                 }
             }
-            // TODO: 좋아요를 해제하는 기능 구현 필요 (누락?)
-            // on to off
         }
     }
 

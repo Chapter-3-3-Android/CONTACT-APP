@@ -15,7 +15,7 @@
         android:theme="@style/Theme.CONTACTAPP"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.ContactActivity"
+            android:name=".ui.ContactActivity"
             android:exported="true"
             android:theme="@style/Theme.CONTACTAPP">
             <intent-filter>

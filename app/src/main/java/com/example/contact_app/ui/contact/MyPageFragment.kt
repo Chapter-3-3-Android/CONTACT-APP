@@ -34,12 +34,11 @@ class MyPageFragment : Fragment() {
 
         with(binding) {
             ivAddSchedule.setOnClickListener {
-                // TODO: ScheduleDialogFragment가 뜨지 않음
                 val dialog = AddScheduleDialogFragment(
                     userIndex = 0,
                     buttonClickListener = object: ButtonClickListener {
                         override fun onSaveButtonClick() {
-                            TODO("Not yet implemented")
+
                         }
                     }
                 )

@@ -13,28 +13,37 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/blue_deep</item>
     </style>
+
     <style name="dialog.edittext" parent="TextAppearance.AppCompat">
         <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/blue_deep</item>
     </style>
+
     <style name="dialog.warning" parent="TextAppearance.AppCompat">
         <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">9sp</item>
         <item name="android:textColor">@color/blue_deep</item>
     </style>
+
     <style name="dialog.btn.dark" parent="TextAppearance.AppCompat">
         <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/blue_light</item>
         <item name="android:background">@drawable/shape_dialog_btn_dark</item>
     </style>
+
     <style name="dialog.btn.light" parent="TextAppearance.AppCompat">
         <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/blue_deep</item>
         <item name="android:stateListAnimator">@null</item>
         <item name="android:background">@drawable/shape_dialog_btn_light</item>
+    </style>
+
+    <style name="ThemeOverlay.CONTACTAPP.FullscreenContainer" parent="">
+        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
+        <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 
 </resources>
