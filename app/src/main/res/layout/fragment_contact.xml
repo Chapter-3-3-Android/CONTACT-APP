@@ -203,11 +203,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/tv_detail_email" />
 
                 <TextView
-                    android:id="@+id/tv_event"
+                    android:id="@+id/tv_schedule"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Event"
+                    android:text="Schedule"
                     android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/div2"
@@ -216,14 +216,14 @@
 
 
                 <ImageView
-                    android:id="@+id/iv_plus"
+                    android:id="@+id/iv_add_schedule"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_plus"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_event"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_schedule"
                     app:layout_constraintEnd_toEndOf="@id/tv_copy_email"
                     app:layout_constraintStart_toStartOf="@id/tv_copy_email"
-                    app:layout_constraintTop_toTopOf="@id/tv_event" />
+                    app:layout_constraintTop_toTopOf="@id/tv_schedule" />
 
 
                 <com.google.android.material.divider.MaterialDivider
@@ -232,18 +232,18 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_event" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_schedule" />
 
 
                 <TextView
-                    android:id="@+id/tv_new_event"
+                    android:id="@+id/tv_new_schedule"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:background="@color/gray_little"
                     android:padding="16dp"
                     android:paddingStart="27dp"
-                    android:text="No Event"
+                    android:text="No Schedule"
                     android:textSize="17dp"
                     android:textColor="@color/gray_deep"
                     app:layout_constraintStart_toStartOf="@id/div2"
@@ -255,7 +255,7 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_new_event" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_new_schedule" />
 
                 <TextView
                     android:id="@+id/tv_account"
@@ -297,8 +297,8 @@
                     android:src="@drawable/ic_blog"
                     android:text="Copy"
                     app:layout_constraintBottom_toBottomOf="@id/tv_blog"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_plus"
-                    app:layout_constraintStart_toStartOf="@+id/iv_plus"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_add_schedule"
+                    app:layout_constraintStart_toStartOf="@+id/iv_add_schedule"
                     app:layout_constraintTop_toTopOf="@id/tv_blog" />
 
                 <TextView
