@@ -3,6 +3,8 @@ package com.example.contact_app.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.contact_app.R
+import com.example.contact_app.data.model.UserProvider
+
 import com.example.contact_app.databinding.ActivityMainBinding
 import com.example.contact_app.ui.adapter.ViewPagerFragmentAdapter
 import com.google.android.material.tabs.TabLayoutMediator
@@ -31,14 +33,6 @@ class ContactActivity : AppCompatActivity() {
         binding.vpItems.adapter = adapter
 
         setTabLayout()
-    }
-
-
-    fun switchTabPosition() {
-        val prePosition = binding.tlItems.selectedTabPosition
-        val postPosition = if (binding.tlItems.selectedTabPosition == 0) 1 else 0
-
-        adapter.notifyItemMoved(prePosition, postPosition)
     }
 
     private fun setTabLayout() {

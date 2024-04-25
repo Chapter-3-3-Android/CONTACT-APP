@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
+private const val ARG_PARAM1 = "param1"
 class MyPageFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
@@ -36,23 +37,24 @@ class MyPageFragment : Fragment() {
                 val dialog = AddScheduleDialogFragment() // 추가해야됨
                 dialog.show(parentFragmentManager, "AddScheduleDialog")
             }
-            //전화아이콘, 문자아이콘, 비디오아이콘 GONE
+            // 전화아이콘, 문자아이콘, 비디오아이콘 GONE
             imgTelephone.visibility = View.GONE
             imgSms.visibility = View.GONE
             imgVideo.visibility = View.GONE
-            //copy 버튼 눌렀을때 복사(전화번호)
+          
+            // copy 버튼 눌렀을때 복사(전화번호)
             tvCopyPhone.setOnClickListener {
                 copyText(tvNumberPhone.text.toString())
             }
-            //copy 버튼 눌렀을때 복사(이메일)
+            // copy 버튼 눌렀을때 복사(이메일)
             tvCopyEmail.setOnClickListener {
                 copyText(tvDetailEmail.text.toString())
             }
-            //blog아이콘 눌렀을때 연결
+            // blog아이콘 눌렀을때 연결
             ivBlog.setOnClickListener {
                 openLink(tvBlog.text.toString())
             }
-            //github아이콘 눌렀을때 연결
+            // github아이콘 눌렀을때 연결
             ivGit.setOnClickListener {
                 openLink(tvGit.text.toString())
             }
@@ -88,5 +90,17 @@ class MyPageFragment : Fragment() {
     private fun openLink(text: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
         startActivity(intent)
+    }
+    
+    companion object {
+        //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가
+        @JvmStatic
+        fun newInstance(param1: Bundle) =
+            MyPageFragment().apply {
+                arguments = Bundle().apply {
+                    putBundle(ARG_PARAM1, param1)
+
+                }
+            }
     }
 }
