@@ -23,15 +23,18 @@
         <item name="android:textSize">9sp</item>
         <item name="android:textColor">@color/blue_deep</item>
     </style>
-    <style name="dialog.btn.light" parent="TextAppearance.AppCompat">
-        <item name="android:includeFontPadding">false</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/blue_light</item>
-    </style>
     <style name="dialog.btn.dark" parent="TextAppearance.AppCompat">
         <item name="android:includeFontPadding">false</item>
         <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/blue_light</item>
+        <item name="android:background">@drawable/shape_dialog_btn_dark</item>
+    </style>
+    <style name="dialog.btn.light" parent="TextAppearance.AppCompat">
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/blue_deep</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:background">@drawable/shape_dialog_btn_light</item>
     </style>
 
 </resources>
