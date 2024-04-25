@@ -1,5 +1,6 @@
 package com.example.contact_app.data.model
 
+import android.icu.text.Transliterator.Position
 import com.example.contact_app.R
 
 object UserProvider {
@@ -12,6 +13,16 @@ object UserProvider {
 
     fun addUser(user: User) {
         _users.add(user)
+    }
+
+    //MyPageFragment, ContactDetailFragment 수정 기능 구현중
+    fun modifyUser() {
+        _users
+    }
+
+    //MyPageFragment, ContactDetailFragment 삭제 기능 구현
+    fun deleteUser(position: Int) {
+        _users.removeAt(position)
     }
 
     fun switchFavoriteByUser(index: Int) {
