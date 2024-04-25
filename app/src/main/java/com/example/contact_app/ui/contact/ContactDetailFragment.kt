@@ -19,6 +19,8 @@ import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentContactBinding
+import com.example.contact_app.extension.ButtonClickListener
+import com.example.contact_app.ui.dialog.AddScheduleDialogFragment
 
 private const val ARG_PARAM1 = "position"
 
@@ -49,6 +51,19 @@ class ContactDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ivAddSchedule.setOnClickListener {
+            val dialog = AddScheduleDialogFragment(
+                userIndex = 0,
+                buttonClickListener = object: ButtonClickListener {
+                    override fun onSaveButtonClick() {
+
+                    }
+                }
+            )
+            dialog.show(parentFragmentManager, "AddScheduleDialog")
+        }
+
         //전달받은 position 데이터값 ui에 binding
         position?.let {
 
@@ -75,6 +90,7 @@ class ContactDetailFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.action_correction -> {
                     val builder = AlertDialog.Builder(requireContext())
+
                     builder.setTitle("프로필 수정")
                     builder.setMessage("수정할 내용을 입력해 주세요")
                     builder.setIcon(R.mipmap.ic_launcher)
@@ -98,8 +114,8 @@ class ContactDetailFragment : Fragment() {
 
                 R.id.action_delete -> {
                     //dialog 띄우고 확인 누르면 삭제 기능 구현 추가
-
                     val builder = AlertDialog.Builder(requireContext())
+
                     builder.setTitle("프로필 삭제")
                     builder.setMessage("정말 삭제하시겠습니까?")
                     builder.setIcon(R.mipmap.ic_launcher)

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.example.contact_app.R
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
@@ -67,9 +69,9 @@ class ContactListFragment : Fragment() {
         binding.contactListView.layoutManager = LinearLayoutManager(context)
         binding.favoriteListView.layoutManager = LinearLayoutManager(context)
 
-//        val dividerItemDecoration = DividerItemDecoration(requireContext(), VERTICAL)
-//        binding.contactListView.addItemDecoration(dividerItemDecoration)
-//        binding.favoriteListView.addItemDecoration(dividerItemDecoration)
+        val dividerItemDecoration = DividerItemDecoration(requireContext(), VERTICAL)
+        binding.contactListView.addItemDecoration(dividerItemDecoration)
+        binding.favoriteListView.addItemDecoration(dividerItemDecoration)
 
         adapterOfContactList.clickToDetail = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int, type: Int) {
