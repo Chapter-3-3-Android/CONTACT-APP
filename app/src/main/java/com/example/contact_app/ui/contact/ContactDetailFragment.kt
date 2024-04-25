@@ -46,6 +46,7 @@ class ContactDetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentContactBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -66,8 +67,8 @@ class ContactDetailFragment : Fragment() {
 
         //전달받은 position 데이터값 ui에 binding
         position?.let {
-
             val detailData: User = UserProvider.users[position!!]
+
             val image = detailData.profileImage
             binding.apply {
                 tvName.text = detailData.name
@@ -78,13 +79,6 @@ class ContactDetailFragment : Fragment() {
                     is Image.ImageUri -> imgSheep.setImageURI(image.uri)
                 }
                 tvDetailEmail.text = detailData.email
-
-                if (detailData.blogLink != null) {
-                    tvBlog.text = detailData.blogLink
-                }
-                if (detailData.githubLink != null) {
-                    tvGit.text = detailData.githubLink
-                }
             }
         }
 
@@ -168,11 +162,13 @@ class ContactDetailFragment : Fragment() {
             }
             // blog 아이콘 눌렀을때 연결
             ivBlog.setOnClickListener {
-                openLink(tvBlog.text.toString())
+                val link = UserProvider.users[position!!].blogLink
+                openLink(link ?: "")
             }
             // github 아이콘 눌렀을때 연결
             ivGit.setOnClickListener {
-                openLink(tvGit.text.toString())
+                val link = UserProvider.users[position!!].githubLink
+                openLink(link ?: "")
             }
         }
     }
@@ -202,10 +198,12 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun openLink(text: String) {
-        if (text != "There is no blog link" && text != "There is no github link") {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
-            startActivity(intent)
+        if (text == "") {
+            return
         }
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+        startActivity(intent)
     }
 
     companion object {

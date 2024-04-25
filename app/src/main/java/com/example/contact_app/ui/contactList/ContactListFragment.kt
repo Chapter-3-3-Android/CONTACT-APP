@@ -61,8 +61,13 @@ class ContactListFragment : Fragment() {
             onClickListener()
         }
 
+        if (favoriteList.size == 0) {
+            binding.favoriteListView.visibility = View.GONE
+        }
+
         val adapterOfContactList = MyAdapter(copyContactList, 1)
         val adapterOfFavoriteList = MyAdapter(favoriteList, 2) // contact list 에서 좋아요 버튼을 눌러추가한 데이터들
+
         binding.contactListView.adapter = adapterOfContactList
         binding.favoriteListView.adapter = adapterOfFavoriteList
 
@@ -75,13 +80,12 @@ class ContactListFragment : Fragment() {
 
         adapterOfContactList.clickToDetail = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int, type: Int) {
-                val detailFragment = ContactDetailFragment.newInstance(position)
+                val detailFragment = ContactDetailFragment.newInstance(position + favoriteList.size)
 
                 requireActivity().supportFragmentManager.beginTransaction()
                     .replace(R.id.fl_items, detailFragment)
                     .addToBackStack(null)
                     .commit()
-
             }
         }
 
@@ -89,12 +93,14 @@ class ContactListFragment : Fragment() {
             // off to on
             override fun onClick(view: View, position: Int, type: Int) {
                 if (type == 1) {
-                    //copycontactlist에서 에서 아이템을 가져온다 : copycontactlist에있는 것을 copy해 list에 추가
+                    // copycontactlist에서 에서 아이템을 가져온다 : copycontactlist에있는 것을 copy해 list에 추가
+                    binding.favoriteListView.visibility = View.VISIBLE
 
                     // copylist의 하트를 바꾼다 copyContactList.
                     favoriteList?.add(copyContactList[position])
-                    favoriteList[favoriteList.size - 1] =
-                        favoriteList[favoriteList.size - 1].copy(isFavorite = true)
+                    favoriteList[favoriteList.size - 1] = favoriteList[favoriteList.size - 1].copy(
+                        isFavorite = true
+                    )
                     binding.favoriteListView.adapter?.notifyDataSetChanged()
 
                     copyContactList?.removeAt(position)
