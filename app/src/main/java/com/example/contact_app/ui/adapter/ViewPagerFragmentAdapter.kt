@@ -23,11 +23,11 @@ class ViewPagerFragmentAdapter(
         }
     }
 
-//    fun getFragment(switchTabPosition: () -> Unit): ContactListFragment {
-//        return contactListFragment.apply {
+    fun getFragment(switchTabPosition: () -> Unit): ContactListFragment {
+        return contactListFragment.apply {
 //            onClickListener1() {
 //                switchTabPosition()
 //            }
-//        }
-//    }
+        }
+    }
 }
