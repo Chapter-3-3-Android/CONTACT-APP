@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

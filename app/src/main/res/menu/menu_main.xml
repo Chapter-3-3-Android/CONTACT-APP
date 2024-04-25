@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.contact_app.ui.ContactActivity">
+    tools:context="com.example.contact_app.ui.main.ContactActivity">
     <item
         android:id="@+id/action_correction"
         android:title="프로필 수정"

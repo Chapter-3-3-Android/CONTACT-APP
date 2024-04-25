@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.main
 
 import android.os.Bundle
 import android.view.View
