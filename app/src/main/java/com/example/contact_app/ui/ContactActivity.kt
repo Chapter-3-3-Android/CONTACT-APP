@@ -29,8 +29,7 @@ class ContactActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setTabLayout()
-        initViewPager()
+        initView()
         initFloatingActionButton()
     }
 
@@ -52,7 +51,7 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViewPager() {
+    private fun initView() {
         adapter = ViewPagerFragmentAdapter(this)
 
         adapter.getFragment() {
@@ -60,6 +59,8 @@ class ContactActivity : AppCompatActivity() {
         }
 
         binding.vpItems.adapter = adapter
+
+        setTabLayout()
     }
 
     private fun switchTabPosition() {

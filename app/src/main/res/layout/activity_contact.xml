@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:visibility="gone"
-        />
+        android:visibility="gone"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/v_area"
@@ -37,7 +36,11 @@
             android:id="@+id/tl_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/gray_light"
+            android:backgroundTint="@color/blue_light"
+            app:tabRippleColor="@color/gray_light"
+            app:tabIconTint="@color/blue_deep"
+            app:tabTextColor="@color/blue_deep"
+            app:tabIndicatorColor="@color/blue_deep"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
