@@ -34,9 +34,10 @@ class MyPageFragment : Fragment() {
         with(binding) {
 
             tvPlus.setOnClickListener {
-                val dialog = AddScheduleDialogFragment() // 추가해야됨
-                dialog.show(parentFragmentManager, "AddScheduleDialog")
+//                val dialog = AddScheduleDialogFragment() // 추가해야됨
+//                dialog.show(parentFragmentManager, "AddScheduleDialog")
             }
+
             // 전화아이콘, 문자아이콘, 비디오아이콘 GONE
             imgTelephone.visibility = View.GONE
             imgSms.visibility = View.GONE

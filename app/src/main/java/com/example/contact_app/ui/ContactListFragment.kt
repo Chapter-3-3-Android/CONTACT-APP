@@ -16,10 +16,8 @@ import com.example.contact_app.databinding.FragmentContactListBinding
 
 class ContactListFragment : Fragment() {
     companion object {
-
-        var favoriteList = mutableListOf<User>()  //!!!!!!!!!!!!!!!!!!!! fragment 에 정의하니 mypage fragment로 이동하고 다시오면 favoritelist가 초기화 되는 문제 model에서 정의해야 할 듯
+        var favoriteList = mutableListOf<User>()
         var copyContactList = mutableListOf<User>()
-
     }
 
     private var _binding: FragmentContactListBinding? = null
@@ -37,7 +35,6 @@ class ContactListFragment : Fragment() {
     ): View {
         _binding = FragmentContactListBinding.inflate(inflater, container, false)
 
-
         return binding.root
     }
 
@@ -47,9 +44,6 @@ class ContactListFragment : Fragment() {
         for (x in 0 until UserProvider.users.size){
             copyContactList.add(UserProvider.users[x])
         }
-
-
-
 
         val my : User = UserProvider.users[0]
         val image = my.profileImage
@@ -63,10 +57,7 @@ class ContactListFragment : Fragment() {
 
         binding.MyProfileView.setOnClickListener {
             onClickListener()
-
         }
-
-
 
         val adapterOfContactList = MyAdapter(copyContactList,1)
         val adapterOfFavoriteList = MyAdapter(favoriteList,2) // contact list 에서 좋아요 버튼을 눌러추가한 데이터들
@@ -76,6 +67,7 @@ class ContactListFragment : Fragment() {
 
         binding.contactListView.layoutManager = LinearLayoutManager(context)
         binding.favoriteListView.layoutManager = LinearLayoutManager(context)
+
 //        val dividerItemDecoration = DividerItemDecoration(requireContext(), VERTICAL)
 //        binding.contactListView.addItemDecoration(dividerItemDecoration)
 //        binding.favoriteListView.addItemDecoration(dividerItemDecoration)
