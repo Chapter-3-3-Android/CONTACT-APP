@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.dialog
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -16,16 +16,17 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import com.example.contact_app.R
-import com.example.contact_app.databinding.FragmentAddContactDialogBinding
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
+import com.example.contact_app.databinding.FragmentAddContactDialogBinding
 import com.example.contact_app.extension.ButtonClickListener
 import com.example.contact_app.extension.ValidExtension.validEmail
 import com.example.contact_app.extension.ValidExtension.validName
 import com.example.contact_app.extension.ValidExtension.validPhoneNumber
 
-class AddContactDialogFragment(private val buttonClickListener: ButtonClickListener) : DialogFragment() {
+class AddContactDialogFragment(private val buttonClickListener: ButtonClickListener) :
+    DialogFragment() {
     private lateinit var binding: FragmentAddContactDialogBinding
     private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
     private var selectedImageUri: Uri? = null
@@ -131,7 +132,7 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
     private fun isConfirmButtonEnable() {
         with(binding) {
             btnPositive.isEnabled = nameEnable && phoneNumberEnable && emailEnable
-            if(btnPositive.isEnabled){
+            if (btnPositive.isEnabled) {
                 btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark_clicked)
             } else {
                 btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark)

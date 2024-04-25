@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.contact
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -12,19 +12,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.UserProvider
-import com.example.contact_app.databinding.FragmentMyPageBinding
+import com.example.contact_app.databinding.FragmentContactBinding
+import com.example.contact_app.extension.ButtonClickListener
+import com.example.contact_app.ui.dialog.AddScheduleDialogFragment
 
-private const val ARG_PARAM1 = "param1"
 class MyPageFragment : Fragment() {
 
-    private var _binding: FragmentMyPageBinding? = null
+    private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
+        _binding = FragmentContactBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -32,16 +33,23 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            ivAddSchedule.setOnClickListener {
+                val dialog = AddScheduleDialogFragment(
+                    userIndex = 0,
+                    buttonClickListener = object: ButtonClickListener {
+                        override fun onSaveButtonClick() {
 
-            tvPlus.setOnClickListener {
-                val dialog = AddScheduleDialogFragment() // 추가해야됨
+                        }
+                    }
+                )
                 dialog.show(parentFragmentManager, "AddScheduleDialog")
             }
+
             // 전화아이콘, 문자아이콘, 비디오아이콘 GONE
             imgTelephone.visibility = View.GONE
             imgSms.visibility = View.GONE
             imgVideo.visibility = View.GONE
-          
+
             // copy 버튼 눌렀을때 복사(전화번호)
             tvCopyPhone.setOnClickListener {
                 copyText(tvNumberPhone.text.toString())
@@ -65,7 +73,13 @@ class MyPageFragment : Fragment() {
         }
     }
 
-    fun displayUserInfo(name: String, phoneNumber: String, email: String, blogLink: String?, githubLink: String?) {
+    fun displayUserInfo(
+        name: String,
+        phoneNumber: String,
+        email: String,
+        blogLink: String?,
+        githubLink: String?,
+    ) {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
@@ -88,19 +102,9 @@ class MyPageFragment : Fragment() {
     }
 
     private fun openLink(text: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
-        startActivity(intent)
-    }
-    
-    companion object {
-        //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가
-        @JvmStatic
-        fun newInstance(param1: Bundle) =
-            MyPageFragment().apply {
-                arguments = Bundle().apply {
-                    putBundle(ARG_PARAM1, param1)
-
-                }
-            }
+        if (text != "There is no blog link" && text != "There is no github link") {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+            startActivity(intent)
+        }
     }
 }
