@@ -15,6 +15,11 @@ object UserProvider {
         _users.add(user)
     }
 
+    fun addSchedule(userIndex: Int, newSchedule: Schedule) {
+        _users[userIndex] = _users[userIndex].copy(
+            schedule = newSchedule
+        )
+    }
     // MyPageFragment, ContactDetailFragment 수정 기능
 //    fun modifyUser() {
 //        _users
