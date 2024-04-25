@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentContactBinding
+import com.example.contact_app.extension.ButtonClickListener
+import com.example.contact_app.ui.dialog.AddScheduleDialogFragment
 
 class MyPageFragment : Fragment() {
 
@@ -31,10 +33,17 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-
-            tvPlus.setOnClickListener {
-//                val dialog = AddScheduleDialogFragment() // 추가해야됨
-//                dialog.show(parentFragmentManager, "AddScheduleDialog")
+            ivPlus.setOnClickListener {
+                // TODO: ScheduleDialogFragment가 뜨지 않음
+                val dialog = AddScheduleDialogFragment(
+                    userIndex = 0,
+                    buttonClickListener = object: ButtonClickListener {
+                        override fun onSaveButtonClick() {
+                            TODO("Not yet implemented")
+                        }
+                    }
+                )
+                dialog.show(parentFragmentManager, "AddScheduleDialog")
             }
 
             // 전화아이콘, 문자아이콘, 비디오아이콘 GONE

@@ -216,11 +216,10 @@
 
 
                 <ImageView
-                    android:id="@+id/tv_plus"
+                    android:id="@+id/iv_plus"
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/ic_plus"
-                    android:text="Copy"
                     app:layout_constraintBottom_toBottomOf="@id/tv_event"
                     app:layout_constraintEnd_toEndOf="@id/tv_copy_email"
                     app:layout_constraintStart_toStartOf="@id/tv_copy_email"
@@ -298,8 +297,8 @@
                     android:src="@drawable/ic_blog"
                     android:text="Copy"
                     app:layout_constraintBottom_toBottomOf="@id/tv_blog"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_plus"
-                    app:layout_constraintStart_toStartOf="@+id/tv_plus"
+                    app:layout_constraintEnd_toEndOf="@+id/iv_plus"
+                    app:layout_constraintStart_toStartOf="@+id/iv_plus"
                     app:layout_constraintTop_toTopOf="@id/tv_blog" />
 
                 <TextView
