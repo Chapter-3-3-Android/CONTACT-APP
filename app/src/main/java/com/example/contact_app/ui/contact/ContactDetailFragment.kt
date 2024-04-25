@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.contact
 
 import android.content.ClipData
 import android.content.ClipboardManager

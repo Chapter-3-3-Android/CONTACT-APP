@@ -1,10 +1,10 @@
-package com.example.contact_app.ui.adapter
+package com.example.contact_app.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.contact_app.ui.ContactDetailFragment
-import com.example.contact_app.ui.ContactListFragment
+import com.example.contact_app.ui.contact.ContactDetailFragment
+import com.example.contact_app.ui.contactList.ContactListFragment
 
 class ViewPagerFragmentAdapter(
     fragmentActivity: FragmentActivity,

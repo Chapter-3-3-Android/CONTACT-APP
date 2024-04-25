@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.contactList
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentContactListBinding
+import com.example.contact_app.ui.contact.MyPageFragment
 
 class ContactListFragment : Fragment() {
     companion object {
@@ -72,7 +73,6 @@ class ContactListFragment : Fragment() {
 
         adapterOfContactList.clickToMypage = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int, type: Int) {
-//
 
                 val bundle = Bundle()
                 bundle.putInt("position", position)

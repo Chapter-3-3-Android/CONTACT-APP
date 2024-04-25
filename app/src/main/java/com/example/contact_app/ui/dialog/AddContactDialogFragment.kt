@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.dialog
 
 import android.app.Activity
 import android.app.AlertDialog

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.contact_app.ui.ContactListFragment"
+        android:name="com.example.contact_app.ui.contactList.ContactListFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_contact_list">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.contact_app.ui.MyPageFragment"
+        android:name="com.example.contact_app.ui.contact.MyPageFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_my_page">
 

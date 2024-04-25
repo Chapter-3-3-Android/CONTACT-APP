@@ -1,4 +1,4 @@
-package com.example.contact_app.ui
+package com.example.contact_app.ui.contact
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -13,8 +13,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
-
-private const val ARG_PARAM1 = "param1"
 
 class MyPageFragment : Fragment() {
 
@@ -98,17 +96,5 @@ class MyPageFragment : Fragment() {
     private fun openLink(text: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
         startActivity(intent)
-    }
-
-    companion object {
-        //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가
-        @JvmStatic
-        fun newInstance(param1: Bundle) =
-            MyPageFragment().apply {
-                arguments = Bundle().apply {
-                    putBundle(ARG_PARAM1, param1)
-
-                }
-            }
     }
 }
