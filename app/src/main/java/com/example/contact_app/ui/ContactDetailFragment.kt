@@ -20,6 +20,8 @@ import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
 
+private const val ARG_PARAM1 = "position"
+
 class ContactDetailFragment : Fragment() {
 
     private var _binding: FragmentMyPageBinding? = null
@@ -30,7 +32,7 @@ class ContactDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         //키값으로 데이터 받아옴
         arguments?.let {
-            position = it.getInt("position")
+            position = it.getInt(ARG_PARAM1)
         }
         if(position == null) {
             position = 0
@@ -71,7 +73,23 @@ class ContactDetailFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.action_correction -> {
-                    //
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("프로필 수정")
+                    builder.setMessage("수정할 내용을 입력해 주세요")
+                    builder.setIcon(R.mipmap.ic_launcher)
+
+                    val listener = object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            when(which) {
+                                DialogInterface.BUTTON_POSITIVE -> position?.let {
+//                                    UserProvider.modifyUser(it)
+                                }
+                            }
+                        }
+                    }
+                    builder.setPositiveButton("확인", listener)
+                    builder.setNegativeButton("취소", listener)
+                    builder.show()
                     true
                 }
                 R.id.action_delete -> {
@@ -85,7 +103,7 @@ class ContactDetailFragment : Fragment() {
                         override fun onClick(dialog: DialogInterface?, which: Int) {
                             when(which) {
                                 DialogInterface.BUTTON_POSITIVE -> position?.let {
-                                    UserProvider.deleteUser(it)
+//                                    UserProvider.deleteUser(it)
                                 }
                             }
                         }
@@ -157,5 +175,14 @@ class ContactDetailFragment : Fragment() {
     private fun openLink(text: String) {
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
         startActivity(intent)
+    }
+
+    companion object {
+        fun newInstance(position: Int): ContactDetailFragment =
+            ContactDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_PARAM1, position)
+                }
+            }
     }
 }
