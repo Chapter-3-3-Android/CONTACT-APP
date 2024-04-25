@@ -68,11 +68,7 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
         editTexts.forEach { editText ->
             editText.addTextChangedListener {
                 editText.checkValidElements()
-            }
-            editText.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus.not()) {
-                    isConfirmButtonEnable()
-                }
+                isConfirmButtonEnable()
             }
         }
 
@@ -133,7 +129,14 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
     }
 
     private fun isConfirmButtonEnable() {
-        binding.btnPositive.isEnabled = selectedImageUri!=null && nameEnable && phoneNumberEnable && emailEnable
+        with(binding) {
+            btnPositive.isEnabled = nameEnable && phoneNumberEnable && emailEnable
+            if(btnPositive.isEnabled){
+                btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark_clicked)
+            } else {
+                btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark)
+            }
+        }
     }
 
     private fun addNewUser() {
