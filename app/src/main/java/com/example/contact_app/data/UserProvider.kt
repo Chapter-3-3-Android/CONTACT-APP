@@ -37,6 +37,7 @@ object UserProvider {
 
     private fun createDummyUsers(): MutableList<User> {
         val users = mutableListOf<User>()
+
         val firstNames = listOf(
             "James",
             "Mary",
@@ -73,6 +74,7 @@ object UserProvider {
             R.drawable.profile9,
             R.drawable.profile10
         )
+
         val blogLinks = listOf(
             "https://rlaxodud214.tistory.com/",
             "https://muk-clouds.tistory.com/",
@@ -88,24 +90,25 @@ object UserProvider {
             "https://github.com/jihyung97"
         )
 
-        for (i in 1..30) {
-            val firstName = firstNames.random()
-            val lastName = lastNames.random()
+        for (i in 0 until 20) {
+            val firstName = firstNames[i % 10]
+            val lastName = lastNames[i % 10]
+            val profileImage = images[i % 10]
+
             val phoneNumber =
                 "+233 ${(1000..9999).random()} ${(10..99).random()} ${(100..999).random()}"
             val email = "${firstName.lowercase()}${lastName.lowercase()}${i}@example.com"
-            val profileImage = images.random()
-            val blogLink = blogLinks.random()
-            val gitLink = gitLinks.random()
+
+            val blogLink = blogLinks[i % 5]
+            val gitLink = gitLinks[i % 5]
 
             val user = User(
                 name = "$firstName $lastName",
                 phoneNumber = phoneNumber,
                 profileImage = Image.ImageDrawable(profileImage),
-                email = email
-                //적용안되는 문제 해결해야됨
-                //blogLink = blogLink
-                //githubLink = gitLink
+                email = email,
+                blogLink = blogLink,
+                githubLink = gitLink,
             )
             users.add(user)
         }
