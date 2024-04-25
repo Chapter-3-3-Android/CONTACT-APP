@@ -33,7 +33,7 @@ class MyPageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
-            ivPlus.setOnClickListener {
+            ivAddSchedule.setOnClickListener {
                 // TODO: ScheduleDialogFragment가 뜨지 않음
                 val dialog = AddScheduleDialogFragment(
                     userIndex = 0,

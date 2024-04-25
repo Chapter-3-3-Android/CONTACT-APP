@@ -20,7 +20,7 @@
         android:id="@+id/v_area"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fl_items"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.viewpager2.widget.ViewPager2

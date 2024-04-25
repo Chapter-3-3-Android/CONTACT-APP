@@ -95,6 +95,7 @@ class ContactActivity : AppCompatActivity() {
         }
     }
 
+    // TODO: 다시 돌아올 때 다시 활성화 로직 돌려야함.
     private fun switchVisibility() {
         val isViewPagerVisibility = binding.vpItems.isVisible
 
