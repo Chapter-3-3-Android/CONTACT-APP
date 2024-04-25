@@ -3,6 +3,7 @@ package com.example.contact_app.ui
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.contact_app.R
 import com.example.contact_app.data.model.Image
@@ -69,12 +71,29 @@ class ContactDetailFragment : Fragment() {
         popupMenu.setOnMenuItemClickListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.action_correction -> {
-                    //dialog 띄우고 확인 누르면 수정 기능 구현 추가
+                    //
                     true
                 }
                 R.id.action_delete -> {
                     //dialog 띄우고 확인 누르면 삭제 기능 구현 추가
-                    position?.let { UserProvider.test(it) }
+                    val builder = AlertDialog.Builder(requireContext())
+                    builder.setTitle("프로필 삭제")
+                    builder.setMessage("정말 삭제하시겠습니까?")
+                    builder.setIcon(R.mipmap.ic_launcher)
+
+                    val listener = object : DialogInterface.OnClickListener {
+                        override fun onClick(dialog: DialogInterface?, which: Int) {
+                            when(which) {
+                                DialogInterface.BUTTON_POSITIVE -> position?.let {
+                                    UserProvider.deleteUser(it)
+                                }
+                            }
+                        }
+                    }
+                    builder.setPositiveButton("확인", listener)
+                    builder.setNegativeButton("취소", listener)
+                    builder.show()
+
                     true
                 }
                 else -> false
