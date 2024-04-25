@@ -285,7 +285,7 @@
                     android:background="@color/blue_light"
                     android:padding="16dp"
                     android:paddingStart="27dp"
-                    android:text="Blog"
+                    android:text="There is no blog link"
                     android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@id/div5"
                     app:layout_constraintTop_toBottomOf="@id/div5" />
@@ -309,7 +309,7 @@
                     android:background="@color/blue_light"
                     android:padding="16dp"
                     android:paddingStart="27dp"
-                    android:text="Github"
+                    android:text="There is no github link"
                     android:textSize="17dp"
                     app:layout_constraintStart_toStartOf="@id/tv_blog"
                     app:layout_constraintTop_toBottomOf="@id/tv_blog" />

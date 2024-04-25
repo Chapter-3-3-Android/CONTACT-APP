@@ -102,7 +102,9 @@ class MyPageFragment : Fragment() {
     }
 
     private fun openLink(text: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
-        startActivity(intent)
+        if (text != "There is no blog link" && text != "There is no github link") {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+            startActivity(intent)
+        }
     }
 }

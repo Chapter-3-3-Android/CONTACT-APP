@@ -72,14 +72,19 @@ class ContactDetailFragment : Fragment() {
             binding.apply {
                 tvName.text = detailData.name
                 tvNumberPhone.text = detailData.phoneNumber
+
                 when (image) {
                     is Image.ImageDrawable -> imgSheep.setImageResource(image.drawable)
                     is Image.ImageUri -> imgSheep.setImageURI(image.uri)
                 }
                 tvDetailEmail.text = detailData.email
-                tvBlog.text = detailData.blogLink
-                tvGit.text = detailData.githubLink
 
+                if (detailData.blogLink != null) {
+                    tvBlog.text = detailData.blogLink
+                }
+                if (detailData.githubLink != null) {
+                    tvGit.text = detailData.githubLink
+                }
             }
         }
 
@@ -197,8 +202,10 @@ class ContactDetailFragment : Fragment() {
     }
 
     private fun openLink(text: String) {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
-        startActivity(intent)
+        if (text != "There is no blog link" && text != "There is no github link") {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+            startActivity(intent)
+        }
     }
 
     companion object {

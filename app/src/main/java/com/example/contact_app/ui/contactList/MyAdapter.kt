@@ -25,7 +25,7 @@ class MyAdapter(val mItems: List<User>, var listType: Int) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.itemView.setOnClickListener {  //클릭이벤트추가부분
+        holder.itemView.setOnClickListener {  // 클릭 이벤트 추가 부분
             clickToDetail?.onClick(it, position, listType)
 
         }
