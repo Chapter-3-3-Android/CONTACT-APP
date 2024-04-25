@@ -36,6 +36,8 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="@dimen/dialog_margin"
                 android:src="@drawable/ic_profile"
+                android:background="@drawable/shape_circle"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="@id/tv_dialog_title"
                 app:layout_constraintStart_toStartOf="@id/tv_dialog_title"
                 app:layout_constraintTop_toBottomOf="@id/tv_dialog_title"/>
@@ -140,10 +142,10 @@
                     android:id="@+id/btn_negative"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dialog_btn_height"
+                    android:elevation="0dp"
                     android:layout_weight="1"
-                    android:background="@drawable/shape_dialog_btn_light"
                     android:text="@string/dialog_button_negative"
-                    style="@style/dialog.btn.dark"/>
+                style="@style/dialog.btn.light"/>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_positive"
@@ -151,9 +153,8 @@
                     android:layout_height="@dimen/dialog_btn_height"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:background="@drawable/shape_dialog_btn_dark"
                     android:text="@string/dialog_button_positive"
-                    style="@style/dialog.btn.light"/>
+                    style="@style/dialog.btn.dark"/>
 
             </LinearLayout>
 
