@@ -77,19 +77,16 @@ class ContactActivity : AppCompatActivity() {
                 override fun onSaveButtonClick() {
                     switchVisibility()
 
-                    val fragment = ContactDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putInt("position", UserProvider.users.size)
-                        }
-                    }
+                    val fragment = ContactDetailFragment.newInstance(
+                        UserProvider.users.size
+                    )
+
                     // dialog에서 save 버튼을 눌렀을 때, detailFragment로 이동한다.
                     supportFragmentManager.commit {
                         replace(R.id.fl_items, fragment)
                         setReorderingAllowed(true)
                         addToBackStack(null)
                     }
-                    // call
-
                 }
             }
 

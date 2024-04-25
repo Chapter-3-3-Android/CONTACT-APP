@@ -10,7 +10,7 @@ import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentContactListBinding
-import com.example.contact_app.ui.contact.MyPageFragment
+import com.example.contact_app.ui.contact.ContactDetailFragment
 
 class ContactListFragment : Fragment() {
     companion object {
@@ -63,7 +63,6 @@ class ContactListFragment : Fragment() {
         binding.contactListView.adapter = adapterOfContactList
         binding.favoriteListView.adapter = adapterOfFavoriteList
 
-
         binding.contactListView.layoutManager = LinearLayoutManager(context)
         binding.favoriteListView.layoutManager = LinearLayoutManager(context)
 
@@ -71,18 +70,12 @@ class ContactListFragment : Fragment() {
 //        binding.contactListView.addItemDecoration(dividerItemDecoration)
 //        binding.favoriteListView.addItemDecoration(dividerItemDecoration)
 
-        adapterOfContactList.clickToMypage = object : MyAdapter.ItemClick {
+        adapterOfContactList.clickToDetail = object : MyAdapter.ItemClick {
             override fun onClick(view: View, position: Int, type: Int) {
+                // onClick함수를 adapter에 적용하여 detailFragment로 Bundle 데이터 넘김
+                // TODO: ContactListFragment -> DetailFragment 전환 기능이 안 되어 있음
+                val detailFragment = ContactDetailFragment.newInstance(position)
 
-                val bundle = Bundle()
-                bundle.putInt("position", position)
-                val ContactDetailDataSent =
-                    MyPageFragment.newInstance(bundle) // onClick함수를 adapter에 적용하여 mypage로 Bundle 데이터 넘김!!!!!!!!!!! mypage에 new instance companion object 생성
-
-//                requireActivity().supportFragmentManager.beginTransaction()
-//                    .replace(R.id.fl_flag, ContactDetailDataSent)
-//                    .addToBackStack(null)
-//                    .commit() //mypage로 이동
             }
         }
 
