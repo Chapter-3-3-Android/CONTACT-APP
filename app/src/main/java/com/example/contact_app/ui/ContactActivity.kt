@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.commit
 import com.example.contact_app.R
+import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.ActivityContactBinding
 import com.example.contact_app.extension.ButtonClickListener
 import com.example.contact_app.ui.adapter.ViewPagerFragmentAdapter
@@ -76,9 +77,14 @@ class ContactActivity : AppCompatActivity() {
                 override fun onSaveButtonClick() {
                     switchVisibility()
 
+                    val fragment = ContactDetailFragment().apply {
+                        arguments = Bundle().apply {
+                            putInt("position", UserProvider.users.size)
+                        }
+                    }
                     // dialog에서 save 버튼을 눌렀을 때, detailFragment로 이동한다.
                     supportFragmentManager.commit {
-                        replace(R.id.fl_items, MyPageFragment())
+                        replace(R.id.fl_items, fragment)
                         setReorderingAllowed(true)
                         addToBackStack(null)
                     }
