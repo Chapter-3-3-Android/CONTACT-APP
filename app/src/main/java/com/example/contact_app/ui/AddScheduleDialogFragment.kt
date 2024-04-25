@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
+import com.example.contact_app.R
 import com.example.contact_app.data.model.Schedule
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentAddScheduleDialogBinding
@@ -52,11 +53,7 @@ class AddScheduleDialogFragment(private val userIndex: Int, private val buttonCl
         editTexts.forEach { editText ->
             editText.addTextChangedListener {
                 editText.checkValidElements()
-            }
-            editText.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus.not()) {
-                    isConfirmButtonEnable()
-                }
+                isConfirmButtonEnable()
             }
         }
 
@@ -96,8 +93,14 @@ class AddScheduleDialogFragment(private val userIndex: Int, private val buttonCl
     }
 
     private fun isConfirmButtonEnable() {
-        binding.btnPositive.isEnabled = nameEnable && dateEnable &&
-                (remindTimeEnable || binding.etRemindTime.text.isBlank())
+        with(binding) {
+            btnPositive.isEnabled = nameEnable && dateEnable && (remindTimeEnable || etRemindTime.text.isBlank())
+            if(btnPositive.isEnabled){
+                btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark_clicked)
+            } else {
+                btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark)
+            }
+        }
     }
 
     private fun addSchedule() {
