@@ -133,7 +133,7 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
     }
 
     private fun isConfirmButtonEnable() {
-        binding.btnPositive.isEnabled = selectedImageUri != null && nameEnable && phoneNumberEnable && emailEnable
+        binding.btnPositive.isEnabled = selectedImageUri!=null && nameEnable && phoneNumberEnable && emailEnable
     }
 
     private fun addNewUser() {
@@ -144,7 +144,7 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
         val newUser = User(
             name = name,
             phoneNumber = phoneNumber,
-            profileImage = image ?: Image.ImageDrawable(R.drawable.ic_user),
+            profileImage = image ?: Image.ImageDrawable(R.drawable.ic_profile),
             email = email
         )
         UserProvider.addUser(newUser)
