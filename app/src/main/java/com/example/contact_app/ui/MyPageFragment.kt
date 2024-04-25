@@ -1,9 +1,15 @@
 package com.example.contact_app.ui
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.UserProvider
 import com.example.contact_app.databinding.FragmentMyPageBinding
@@ -25,16 +31,46 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        with(binding) {
+
+            tvPlus.setOnClickListener {
+                val dialog = AddScheduleDialogFragment() // 추가해야됨
+                dialog.show(parentFragmentManager, "AddScheduleDialog")
+            }
+            // 전화아이콘, 문자아이콘, 비디오아이콘 GONE
+            imgTelephone.visibility = View.GONE
+            imgSms.visibility = View.GONE
+            imgVideo.visibility = View.GONE
+          
+            // copy 버튼 눌렀을때 복사(전화번호)
+            tvCopyPhone.setOnClickListener {
+                copyText(tvNumberPhone.text.toString())
+            }
+            // copy 버튼 눌렀을때 복사(이메일)
+            tvCopyEmail.setOnClickListener {
+                copyText(tvDetailEmail.text.toString())
+            }
+            // blog아이콘 눌렀을때 연결
+            ivBlog.setOnClickListener {
+                openLink(tvBlog.text.toString())
+            }
+            // github아이콘 눌렀을때 연결
+            ivGit.setOnClickListener {
+                openLink(tvGit.text.toString())
+            }
+        }
         val firstUser = UserProvider.users.firstOrNull()
         firstUser?.let { user ->
-            displayUserInfo(user.name, user.phoneNumber, user.email)
+            displayUserInfo(user.name, user.phoneNumber, user.email, user.blogLink, user.githubLink)
         }
     }
 
-    fun displayUserInfo(name: String, phoneNumber: String, email: String) {
+    fun displayUserInfo(name: String, phoneNumber: String, email: String, blogLink: String?, githubLink: String?) {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
+        binding.tvBlog.text = blogLink
+        binding.tvGit.text = githubLink
     }
 
     override fun onDestroyView() {
@@ -42,8 +78,21 @@ class MyPageFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
+    private fun copyText(text: String) {
+        val clipboard =
+            requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText("label", text)
+        clipboard.setPrimaryClip(clip)
 
+        Toast.makeText(requireContext(), "클립보드에 복사되었습니다", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun openLink(text: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+        startActivity(intent)
+    }
+    
+    companion object {
         //mypage에 newinstance 메소드를 contactlistfragment의 데이터를 넘겨받기 위해 추가
         @JvmStatic
         fun newInstance(param1: Bundle) =

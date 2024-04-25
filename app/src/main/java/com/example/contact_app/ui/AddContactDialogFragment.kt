@@ -1,32 +1,35 @@
 package com.example.contact_app.ui
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
-import com.example.contact_app.extension.ValidExtension.validEmail
-import com.example.contact_app.extension.ValidExtension.validName
-import com.example.contact_app.extension.ValidExtension.validPhoneNumber
+import com.example.contact_app.R
+import com.example.contact_app.databinding.FragmentAddContactDialogBinding
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
-import com.example.contact_app.databinding.FragmentAddContactDialogBinding
 import com.example.contact_app.extension.ButtonClickListener
+import com.example.contact_app.extension.ValidExtension.validEmail
+import com.example.contact_app.extension.ValidExtension.validName
+import com.example.contact_app.extension.ValidExtension.validPhoneNumber
 
 class AddContactDialogFragment(private val buttonClickListener: ButtonClickListener) : DialogFragment() {
     private lateinit var binding: FragmentAddContactDialogBinding
     private lateinit var galleryResultLauncher: ActivityResultLauncher<Intent>
     private var selectedImageUri: Uri? = null
-    private lateinit var image: Image
+    private var image: Image? = null
     private val editTexts
         get() = with(binding) {
             listOf(
@@ -39,22 +42,47 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
     private var phoneNumberEnable = false
     private var emailEnable = false
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAddContactDialogBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val builder = AlertDialog.Builder(requireActivity())
+        val inflater = requireActivity().layoutInflater
+        binding = FragmentAddContactDialogBinding.inflate(inflater)
+
+        builder.setView(binding.root)
+        with(binding) {
+            tvDialogTitle.setText("Add Contact")
+            btnNegative.setOnClickListener {
+                dismiss()
+            }
+            btnPositive.setOnClickListener {
+                addNewUser()
+                buttonClickListener.onSaveButtonClick()
+                dismiss()
+            }
+            ivProfile.clipToOutline = true
+            ivProfile.setOnClickListener {
+                openGallery()
+            }
+        }
+        galleryResultLauncher()
+
+        editTexts.forEach { editText ->
+            editText.addTextChangedListener {
+                editText.checkValidElements()
+                isConfirmButtonEnable()
+            }
+        }
+
+        return builder.create()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initView()
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.apply {
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
     }
 
-    private fun initView() {
+    private fun galleryResultLauncher() {
         galleryResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -64,85 +92,30 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
                     selectedImageUri = it
                     binding.ivProfile.setImageURI(selectedImageUri)
                     image = Image.ImageUri(selectedImageUri!!)
-                }
-
-                isConfirmButtonEnable()
-            }
-        }
-        binding.ivProfile.clipToOutline = true
-
-        editTexts.forEach { editText ->
-            editText.addTextChangedListener {
-                editText.checkValidElements()
-            }
-            editText.setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus.not()) {
                     isConfirmButtonEnable()
                 }
             }
         }
-        onClick()
-    }
-
-    private fun onClick() {
-        binding.ivProfile.setOnClickListener {
-            openGallery()
-        }
-
-        binding.btnNegative.setOnClickListener {
-            dismiss()
-        }
-
-        binding.btnPositive.setOnClickListener {
-            addNewUser()
-            buttonClickListener.onSaveButtonClick()
-            dismiss()
-        }
     }
 
     private fun openGallery() {
-        val intent =
-            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         galleryResultLauncher.launch(intent)
     }
 
     private fun checkValidName(text: String) {
-        when {
-            text.validName() -> {
-                binding.tvNameWarning.visibility = View.INVISIBLE
-                nameEnable = true
-            }
-            else -> {
-                binding.tvNameWarning.visibility = View.VISIBLE
-                nameEnable = true
-            }
-        }
+        nameEnable = text.validName()
+        binding.tvNameWarning.visibility = if (nameEnable) View.GONE else View.VISIBLE
     }
 
     private fun checkValidPhoneNumber(text: String) {
-        when {
-            text.validPhoneNumber() -> {
-                binding.tvNumberWarning.visibility = View.INVISIBLE
-                phoneNumberEnable = true
-            }
-            else -> {
-                binding.tvNameWarning.visibility = View.VISIBLE
-                phoneNumberEnable = false
-            }
-        }
+        phoneNumberEnable = text.validPhoneNumber()
+        binding.tvNumberWarning.visibility = if (phoneNumberEnable) View.GONE else View.VISIBLE
     }
 
     private fun checkValidEmail(text: String) {
-        when {
-            text.validEmail() -> {
-                binding.tvEmailWarning.visibility = View.INVISIBLE
-                nameEnable = true
-            }
-            else -> {
-                binding.tvNameWarning.visibility = View.VISIBLE
-                nameEnable = false
-            }
-        }
+        emailEnable = text.validEmail()
+        binding.tvEmailWarning.visibility = if (emailEnable) View.GONE else View.VISIBLE
     }
 
     private fun EditText.checkValidElements() = with(binding) {
@@ -156,7 +129,14 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
     }
 
     private fun isConfirmButtonEnable() {
-        binding.btnPositive.isEnabled = image != null && nameEnable && phoneNumberEnable && emailEnable
+        with(binding) {
+            btnPositive.isEnabled = nameEnable && phoneNumberEnable && emailEnable
+            if(btnPositive.isEnabled){
+                btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark_clicked)
+            } else {
+                btnPositive.setBackgroundResource(R.drawable.shape_dialog_btn_dark)
+            }
+        }
     }
 
     private fun addNewUser() {
@@ -165,10 +145,10 @@ class AddContactDialogFragment(private val buttonClickListener: ButtonClickListe
         val email = binding.etEmail.text.toString()
 
         val newUser = User(
-            name,
-            phoneNumber,
-            image,
-            email,
+            name = name,
+            phoneNumber = phoneNumber,
+            profileImage = image ?: Image.ImageDrawable(R.drawable.ic_profile),
+            email = email
         )
         UserProvider.addUser(newUser)
     }
