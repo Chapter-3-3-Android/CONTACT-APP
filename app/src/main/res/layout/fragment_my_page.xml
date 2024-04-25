@@ -14,16 +14,6 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/img_back"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/tv_contact"
             android:layout_width="0dp"
@@ -34,6 +24,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.516" />
@@ -42,7 +33,7 @@
             android:id="@+id/img_option"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="37dp"
             android:src="@drawable/ic_option"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +59,8 @@
                 android:id="@+id/img_sheep"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="28dp"
                 android:src="@drawable/img_sheep"
+                android:layout_marginTop="28dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +99,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +106,6 @@
                 android:layout_marginTop="12dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
-
 
                 <ImageView
                     android:id="@+id/iv_phone"
@@ -166,8 +155,8 @@
                     android:id="@+id/iv_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:src="@drawable/ic_email"
+                    android:layout_marginTop="7dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_number_phone" />
 
@@ -261,8 +250,6 @@
                     app:layout_constraintStart_toStartOf="@id/div2"
                     app:layout_constraintTop_toBottomOf="@id/div2" />
 
-
-
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/div4"
                     android:layout_width="match_parent"
@@ -270,7 +257,6 @@
                     android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_new_event" />
-
 
                 <TextView
                     android:id="@+id/tv_account"
@@ -283,13 +269,11 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/div4" />
 
-
-
                 <com.google.android.material.divider.MaterialDivider
                     android:id="@+id/div5"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     app:layout_constraintStart_toStartOf="@id/tv_account"
                     app:layout_constraintTop_toBottomOf="@+id/tv_account" />
 
@@ -307,7 +291,6 @@
                     app:layout_constraintStart_toStartOf="@id/div5"
                     app:layout_constraintTop_toBottomOf="@id/div5" />
 
-
                 <ImageView
                     android:id="@+id/iv_blog"
                     android:layout_width="wrap_content"
@@ -318,7 +301,6 @@
                     app:layout_constraintEnd_toEndOf="@+id/tv_plus"
                     app:layout_constraintStart_toStartOf="@+id/tv_plus"
                     app:layout_constraintTop_toTopOf="@id/tv_blog" />
-
 
                 <TextView
                     android:id="@+id/tv_git"
@@ -380,9 +362,6 @@
                     android:layout_weight="1"
                     android:src="@drawable/ic_video" />
             </LinearLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
