@@ -23,9 +23,9 @@ import com.example.contact_app.databinding.FragmentMyPageBinding
 private const val ARG_PARAM1 = "position"
 
 class ContactDetailFragment : Fragment() {
-
     private var _binding: FragmentMyPageBinding? = null
     private val binding get() = _binding!!
+  
     private var position: Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -82,18 +82,21 @@ class ContactDetailFragment : Fragment() {
                         override fun onClick(dialog: DialogInterface?, which: Int) {
                             when(which) {
                                 DialogInterface.BUTTON_POSITIVE -> position?.let {
-//                                    UserProvider.modifyUser(it)
+                                    // UserProvider.modifyUser(it)
                                 }
                             }
                         }
                     }
+                    
                     builder.setPositiveButton("확인", listener)
                     builder.setNegativeButton("취소", listener)
                     builder.show()
+
                     true
                 }
                 R.id.action_delete -> {
                     //dialog 띄우고 확인 누르면 삭제 기능 구현 추가
+
                     val builder = AlertDialog.Builder(requireContext())
                     builder.setTitle("프로필 삭제")
                     builder.setMessage("정말 삭제하시겠습니까?")
@@ -103,17 +106,19 @@ class ContactDetailFragment : Fragment() {
                         override fun onClick(dialog: DialogInterface?, which: Int) {
                             when(which) {
                                 DialogInterface.BUTTON_POSITIVE -> position?.let {
-//                                    UserProvider.deleteUser(it)
+                                    // UserProvider.deleteUser(it)
                                 }
                             }
                         }
                     }
+                    
                     builder.setPositiveButton("확인", listener)
                     builder.setNegativeButton("취소", listener)
                     builder.show()
 
                     true
                 }
+                
                 else -> false
             }
         }
@@ -122,27 +127,27 @@ class ContactDetailFragment : Fragment() {
             imgOption.setOnClickListener {
                 popupMenu.show()
             }
-            //전화아이콘 눌렀을때 연결
+            // 전화 아이콘 눌렀을때 연결
             imgTelephone.setOnClickListener {
                 openTelephone(tvNumberPhone.text.toString())
             }
-            //문자아이콘 눌렀을때 연결
+            // 문자 아이콘 눌렀을때 연결
             imgSms.setOnClickListener {
                 openMessenger(tvNumberPhone.text.toString())
             }
-            //copy 버튼 눌렀을때 복사(전화번호)
+            // copy 버튼 눌렀을때 복사 (전화번호)
             tvCopyPhone.setOnClickListener {
                 copyText(tvNumberPhone.text.toString())
             }
-            //copy 버튼 눌렀을때 복사(이메일)
+            // copy 버튼 눌렀을때 복사 (이메일)
             tvCopyEmail.setOnClickListener {
                 copyText(tvDetailEmail.text.toString())
             }
-            //blog아이콘 눌렀을때 연결
+            // blog 아이콘 눌렀을때 연결
             ivBlog.setOnClickListener {
                 openLink(tvBlog.text.toString())
             }
-            //github아이콘 눌렀을때 연결
+            // github 아이콘 눌렀을때 연결
             ivGit.setOnClickListener {
                 openLink(tvGit.text.toString())
             }

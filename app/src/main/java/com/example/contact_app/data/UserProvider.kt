@@ -15,12 +15,12 @@ object UserProvider {
         _users.add(user)
     }
 
-    //MyPageFragment, ContactDetailFragment 수정 기능
+    // MyPageFragment, ContactDetailFragment 수정 기능
 //    fun modifyUser() {
 //        _users
 //    }
 
-    //MyPageFragment, ContactDetailFragment 삭제 기능
+    // MyPageFragment, ContactDetailFragment 삭제 기능
 //    fun deleteUser(position: Int) {
 //        _users.removeAt(position)
 //    }
