@@ -78,7 +78,7 @@ class ContactActivity : AppCompatActivity() {
                     switchVisibility()
 
                     val fragment = ContactDetailFragment.newInstance(
-                        UserProvider.users.size
+                        UserProvider.users.size - 1
                     )
 
                     // dialog에서 save 버튼을 눌렀을 때, detailFragment로 이동한다.

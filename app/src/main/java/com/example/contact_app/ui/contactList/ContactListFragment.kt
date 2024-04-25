@@ -79,16 +79,18 @@ class ContactListFragment : Fragment() {
             }
         }
 
-
         adapterOfContactList.clickToLike = object : MyAdapter.ItemClick {
+            // off to on
             override fun onClick(view: View, position: Int, type: Int) {
                 if (type == 1) {
                     //copycontactlist에서 에서 아이템을 가져온다 : copycontactlist에있는 것을 copy해 list에 추가
+
                     // copylist의 하트를 바꾼다 copyContactList.
                     favoriteList?.add(copyContactList[position])
                     favoriteList[favoriteList.size - 1] =
                         favoriteList[favoriteList.size - 1].copy(isFavorite = true)
                     binding.favoriteListView.adapter?.notifyDataSetChanged()
+
 
                     copyContactList?.removeAt(position)
                     binding.contactListView.adapter?.notifyItemRangeRemoved(
@@ -97,6 +99,8 @@ class ContactListFragment : Fragment() {
                     )
                 }
             }
+            // TODO: 좋아요를 해제하는 기능 구현 필요 (누락?)
+            // on to off
         }
     }
 
