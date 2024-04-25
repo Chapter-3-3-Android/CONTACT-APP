@@ -18,12 +18,12 @@ import com.example.contact_app.R
 import com.example.contact_app.data.model.Image
 import com.example.contact_app.data.model.User
 import com.example.contact_app.data.model.UserProvider
-import com.example.contact_app.databinding.FragmentMyPageBinding
+import com.example.contact_app.databinding.FragmentContactBinding
 
 private const val ARG_PARAM1 = "position"
 
 class ContactDetailFragment : Fragment() {
-    private var _binding: FragmentMyPageBinding? = null
+    private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
 
     private var position: Int? = null
@@ -43,7 +43,7 @@ class ContactDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
+        _binding = FragmentContactBinding.inflate(inflater, container, false)
         return binding.root
     }
 

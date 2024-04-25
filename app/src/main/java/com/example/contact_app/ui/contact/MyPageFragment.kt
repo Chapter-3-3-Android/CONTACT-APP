@@ -12,18 +12,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.contact_app.data.model.UserProvider
-import com.example.contact_app.databinding.FragmentMyPageBinding
+import com.example.contact_app.databinding.FragmentContactBinding
 
 class MyPageFragment : Fragment() {
 
-    private var _binding: FragmentMyPageBinding? = null
+    private var _binding: FragmentContactBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
+        _binding = FragmentContactBinding.inflate(inflater, container, false)
         return binding.root
     }
 
