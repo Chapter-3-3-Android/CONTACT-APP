@@ -60,11 +60,13 @@ class MyPageFragment : Fragment() {
             }
             // blog아이콘 눌렀을때 연결
             ivBlog.setOnClickListener {
-                openLink(tvBlog.text.toString())
+                val link = UserProvider.users[0].blogLink
+                openLink(link ?: "")
             }
             // github아이콘 눌렀을때 연결
             ivGit.setOnClickListener {
-                openLink(tvGit.text.toString())
+                val link = UserProvider.users[0].githubLink
+                openLink(link ?: "")
             }
         }
         val firstUser = UserProvider.users.firstOrNull()
@@ -100,9 +102,11 @@ class MyPageFragment : Fragment() {
     }
 
     private fun openLink(text: String) {
-        if (text != "There is no blog link" && text != "There is no github link") {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
-            startActivity(intent)
+        if (text == "") {
+            return
         }
+
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(text))
+        startActivity(intent)
     }
 }
