@@ -83,8 +83,6 @@ class MyPageFragment : Fragment() {
         binding.tvName.text = name
         binding.tvNumberPhone.text = phoneNumber
         binding.tvDetailEmail.text = email
-        binding.tvBlog.text = blogLink
-        binding.tvGit.text = githubLink
     }
 
     override fun onDestroyView() {
